@@ -1,0 +1,19 @@
+# zimfw install
+zmodule environment     # set sane zsh built-in environment options
+zmodule input           # apply correct keybindings for input events(Backspace, Delete, Insert, Home and so on)
+zmodule termtitle       # set a custom terminal title
+zmodule duration-info   # pass the duration-info to prompt
+zmodule git-info        # pass the git-info to prompt
+
+# zmodule prompt-pwd
+# zmodule bira          # Now I'm using starship
+zmodule zsh-users/zsh-completions --fpath src
+zmodule completion
+zmodule zdharma-continuum/fast-syntax-highlighting
+zmodule zsh-users/zsh-history-substring-search
+zmodule zsh-users/zsh-autosuggestions
+# zmodule supercrabtree/k
+# zmodule hlissner/zsh-autopair
+# zmodule agkozak/zsh-z
+zmodule Aloxaf/fzf-tab
+

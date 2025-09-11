@@ -1,0 +1,51 @@
+# starship configuration file
+
+## General config
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+# Inserts a blank line between shell prompts
+format = """
+$username$directory\
+$git_branch$git_commit$git_state$git_metrics$git_status\
+$fill\
+$memory_usage\
+$cmd_duration\
+$package\
+$c$cpp$python$lua\
+$time
+$character
+"""
+
+add_newline = true
+
+## Nerd Font Symbols Preset
+[directory]
+truncation_length = 5       # the number of parents folders
+truncate_to_repo = false    # don't truncate to the root of git repo
+read_only = " 󰌾"
+
+[memory_usage]
+symbol = "󰍛 "
+
+[time]
+disabled = false
+format = 'at[ $time]($style) '
+
+[git_branch]
+symbol = " "
+[git_commit]
+tag_symbol = '  '
+
+# common languages
+[c]
+symbol = " "
+[cpp]
+symbol = " "
+[lua]
+symbol = " "
+[python]
+symbol = " "
+
+[package]
+symbol = "󰏗 "
