@@ -85,7 +85,8 @@ return {
       { "<leader>e", function() require("snacks").explorer() end, desc = "Open Snakcks File Explorer" },
       { "<leader>rf", function() require("snacks").rename.rename_file() end, desc = "Rename File" },
       -- Use snacks's picker to replace telescope
-      { "<C-o>", function() require("snacks").picker.recent() end, desc = "Find Recent Used Files" },
+      -- { "<C-o>", function() require("snacks").picker.recent() end, desc = "Find Recent Used Files" },
+      -- Its performance is disappointing, and <C-o> is useful in other place
       { "<C-n>", function() require("snacks").picker.files() end, desc = "Find Files by Name" },
       { "<C-c>", function() require("snacks").picker.grep() end, desc = "Find Files by Contents" },
       { "<leader>hp", function() require("snacks").picker.help() end, desc = "Help Pages" },

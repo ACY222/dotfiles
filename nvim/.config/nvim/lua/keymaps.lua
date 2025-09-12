@@ -82,10 +82,9 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     local opts = { buffer = true, silent = true, noremap = true, }
     vim.keymap.set('i', ',r', '<++>', opts)                     -- create placeholder
-    vim.keymap.set('i', ',i', '** <++><Esc>F*i', opts)          -- italic
-    vim.keymap.set('i', ',b', '**** <++><Esc>F*hi', opts)       -- bold
-    vim.keymap.set('i', ',s', '~~~~ <++><Esc>F~hi', opts)       -- sliced
-    vim.keymap.set('i', ',d', '``<++><Esc>F`i', opts)           -- code block
+    vim.keymap.set('i', ',i', '**<left>', opts)          -- italic
+    vim.keymap.set('i', ',b', '****<left><left>', opts)       -- bold
+    vim.keymap.set('i', ',s', '~~~~<left><left>', opts)       -- sliced
     vim.keymap.set('i', ',c', '```<Enter><++><Enter>```<Enter><Esc>2kA', opts)  -- big code block
 
     vim.keymap.set('i', ',m', '- [ ] ', opts)                   -- check mark
