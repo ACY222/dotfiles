@@ -4,24 +4,12 @@ return {
   config = function()
     require('hlchunk').setup({
       -- it's slow, and sometimes it looks wired
-      chunk = {               -- disable show current domain
-        enable = false,
-        chars = {           -- by default
-          horizontal_line = "─",
-          vertical_line = "│",
-          left_top = "╭",
-          left_bottom = "╰",
-          right_arrow = ">",
-        },
-        use_treesitter = true,
-        style = "#806d9c",
-      },
-      indent = {              -- vertical indent line
+      indent = {              -- vertical indent line, it's a little annoying for me now
         enable = true,
         -- style = { vim.api.nvim_get_hl(0, { name = "Whitespace" }) },
         use_treesitter = false,
         -- chars = { "│", "┊",},
-        chars = { "│" },
+        chars = { "┊" },
         style = {         -- Yeah, it's very clear, looks not too bad
           "#000000",      -- the first one will be ignored
           "#FF0000",      -- red

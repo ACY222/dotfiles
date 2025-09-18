@@ -46,6 +46,7 @@ return {
   {
     'ijimiji/tabout.nvim',
     event = 'InsertEnter',
+    -- I need to enable tabout from $$
   },
   {
     -- it does what he said, rainbow-delimiters(brackets)
