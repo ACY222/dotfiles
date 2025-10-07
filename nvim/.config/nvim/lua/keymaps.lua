@@ -87,7 +87,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('i', ',i', '**<left>', opts)          -- italic
     vim.keymap.set('i', ',b', '****<left><left>', opts)       -- bold
     vim.keymap.set('i', ',s', '~~~~<left><left>', opts)       -- sliced
-    vim.keymap.set('i', ',c', '```<Enter><++><Enter>```<Enter><Esc>2kA', opts)  -- big code block
+    vim.keymap.set('i', ',c', '```<Enter><++><Enter>```<Enter><Esc>3kA', opts)  -- big code block
 
     vim.keymap.set('i', ',m', '- [ ] ', opts)                   -- check mark
     vim.keymap.set('n', ' m', '/]<CR>hrx', opts)                -- finish check mark
