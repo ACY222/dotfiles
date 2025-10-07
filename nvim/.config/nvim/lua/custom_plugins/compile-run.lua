@@ -13,13 +13,13 @@ local compileRun = function()
         vim.cmd("term gcc % -o %< && ./%< && rm %<")
     elseif fileType == 'cpp' then
         split()
-        vim.cmd("term g++ -std=c++23 % -o %< && ./%< && rm %<")
+        vim.cmd("term g++ -std=c++23 -Wall % -o %< && ./%< && rm %<")
     elseif fileType == 'python' then
         split()
         vim.cmd("term python3 %")
-    elseif fileType == 'lua' then
-        split()
-        vim.cmd("term luajit %")        -- I don't have this tool now
+    -- elseif fileType == 'lua' then
+    --     split()
+    --     vim.cmd("term luajit %")        -- I don't have this tool now
     elseif fileType == 'markdown' then
         -- vim.cmd(":InstantMarkdownPreview")
         vim.cmd(":MarkdownPreview")
