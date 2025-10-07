@@ -108,7 +108,7 @@ return {
           "--clang-tidy",
           "--header-insertion=iwyu",
           "--completion-style=detailed",
-          "--pch-storage=memory"
+          "--pch-storage=memory",
         },
         filetypes = { "c", "cpp" },
         root_dir = lspconfig.util.root_pattern(
