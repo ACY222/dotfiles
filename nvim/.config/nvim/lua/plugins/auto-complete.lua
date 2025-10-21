@@ -43,7 +43,7 @@ return {
           'pylsp',                -- python
           'clangd',               -- c/cpp
           'marksman',             -- markdown
-          -- 'rust-analyzer',        -- rust
+          'rust-analyzer',        -- rust
         },
         automatic_enable = true,
         automatic_installation = true,

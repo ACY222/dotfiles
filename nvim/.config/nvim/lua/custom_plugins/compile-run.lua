@@ -23,6 +23,8 @@ local compileRun = function()
     elseif fileType == 'markdown' then
         -- vim.cmd(":InstantMarkdownPreview")
         vim.cmd(":MarkdownPreview")
+    elseif fileType == 'rust' then
+        vim.cmd("term rustc %< && ./&< && rm %<")
     end
 end
 
