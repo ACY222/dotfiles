@@ -5,7 +5,15 @@ return {
     'mason-org/mason.nvim',
     lazy = false,
     config = function()
-      require('mason').setup()
+      require('mason').setup({
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+          }
+        }
+      })
     end,
   },
 
@@ -43,12 +51,43 @@ return {
           'pylsp',                -- python
           'clangd',               -- c/cpp
           'marksman',             -- markdown
-          -- 'rust-analyzer',        -- rust
+          'rust-analyzer',        -- rust
         },
         automatic_enable = true,
         automatic_installation = true,
       })
       local lspconfig = require('lspconfig')
+
+      vim.lsp.config('rust_analyzer', {
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = {
+              enable = false;
+            },
+            check = {
+              command = "clippy",
+              -- avoid contradiction
+              extraArgs = { "--target-dir=target/clippy" },
+            },
+
+            -- it doesnot work?
+            inlayHints = {
+              -- variable types
+              bindingHints = true,
+              -- intermidiate types
+              chainingHints = true,
+              -- function parameters
+              parameterHints = true,
+            },
+
+            cargo = {
+              loadOutDirsFromCheck = true,
+              allFeatures = true,
+            },
+          }
+        }
+      })
+
       lspconfig.lua_ls.setup({
         settings = {
           Lua = {
