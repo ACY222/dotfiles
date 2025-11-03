@@ -88,7 +88,7 @@ return {
         }
       })
 
-      lspconfig.lua_ls.setup({
+      vim.lsp.config('lua_ls', {
         settings = {
           Lua = {
             runtime = { version = 'LuaJIT' },
@@ -110,7 +110,7 @@ return {
         },
       })
 
-      lspconfig.pylsp.setup({
+      vim.lsp.config('pylsp', {
         settings = {
           pylsp = {
             plugins = {
@@ -139,7 +139,7 @@ return {
         }
       })
 
-      lspconfig.clangd.setup({
+      vim.lsp.config('clangd', {
         cmd = {
           "clangd",
           "--background-index",
@@ -164,7 +164,7 @@ return {
         }
       })
 
-      lspconfig.marksman.setup({
+      vim.lsp.config('marksman', {
         settings = {
           marksman = {
             -- check root directory
