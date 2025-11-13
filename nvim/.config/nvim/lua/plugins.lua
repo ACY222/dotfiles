@@ -53,6 +53,9 @@ require('lazy').setup({
   require('plugins.gitsigns'),        -- show git signs in files
   -- lsp related
   require('plugins.auto-complete'),   -- no need to explain
+  -- debug
+  require('plugins.dap'),
+  require('plugins.dap-view'),
   -- edit
   require('plugins.auto-pairs'),      -- auto pairs, tab to escape, colorful brackets
   require('plugins.comment'),         -- smart gc
@@ -64,6 +67,7 @@ require('lazy').setup({
   -- navigation
   require('plugins.search'),          -- better f, t, and word-search
   require('plugins.yazi'),            -- file manager
+  require('plugins.outline'),         -- code outline window
   -- tools
   require('plugins.leetcode'),
   require('plugins.snacks'),
