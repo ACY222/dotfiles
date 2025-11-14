@@ -10,11 +10,12 @@ return {
             enabled_filetypes = { 'markdown' } },
           ['<'] = { escape = true, close = true, pair = '<>',
             disable_command_mode = true,
-            disabled_filetypes = { 'c', 'cpp', 'python' } },
+            disabled_filetypes = { 'c', 'cpp', 'python', 'rust' } },
           ['>'] = { escape = true, close = false, pair = '<>',
             disable_command_mode = true,
             disabled_filetypes = { 'c', 'cpp', 'python' } },
-          ["'"] = { escape = true, close = true, pair = "''" },
+          ["'"] = { escape = true, close = true, pair = "''",
+            disabled_filetypes = { 'rust', } },
           -- in vim, " is used to comment
           ['"'] = { escape = true, close = true, pair = '""',
             disabled_filetypes = { 'vim' } },
@@ -32,7 +33,7 @@ return {
         -- local next_char = col < #current_line and
         -- current_line:sub(col + 1, col + 1) or ''
         -- if prev_char is a letter or "'", no auto-close
-        if prev_char:match("[a-zA-Z0-9']") then
+        if prev_char:match("[a-zA-Z0-9&']") then
           return "'"
         else
           return "''<Left>"
