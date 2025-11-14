@@ -4,7 +4,7 @@ return {
     event = 'VeryLazy',
     config = function()
       require('flash').setup({
-        -- f, F, t, T wiht labels
+        -- f, F, t, T with labels
         modes = {
           char = {
             jump_labels = true
