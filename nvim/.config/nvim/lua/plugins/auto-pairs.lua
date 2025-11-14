@@ -43,11 +43,11 @@ return {
       --   { expr = true, noremap = true, silent = true })
     end,
   },
-  {
-    'ijimiji/tabout.nvim',
-    event = 'InsertEnter',
-    -- I need to enable tabout from $$
-  },
+  -- {
+  --   'ijimiji/tabout.nvim',
+  --   event = 'InsertEnter',
+  --   -- I need to enable tabout from $$
+  -- },
   {
     -- it does what he said, rainbow-delimiters(brackets)
     "HiPhish/rainbow-delimiters.nvim",
