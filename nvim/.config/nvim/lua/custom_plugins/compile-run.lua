@@ -24,7 +24,8 @@ local compileRun = function()
         -- vim.cmd(":InstantMarkdownPreview")
         vim.cmd(":MarkdownPreview")
     elseif fileType == 'rust' then
-        vim.cmd("term rustc % && ./%< && rm %<")
+        split()
+        vim.cmd("term cargo run -q")
     end
 end
 
