@@ -244,10 +244,9 @@ return {
           -- enable this if high CPU usage
           -- treesitter_highlighting = false,
         },
-        -- use noice's cmdline menu instead
-        -- cmdline = {
-        --   enbaled = false,
-        -- },
+        sources = {
+            default = { 'lsp', 'path', 'snippets', 'buffer' },
+        },
         menu = {
           auto_show = true,
           draw = {

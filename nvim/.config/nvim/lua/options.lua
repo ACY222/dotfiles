@@ -21,7 +21,7 @@ local options = {
   shiftwidth      = 4,
   shiftround      = true,
   showtabline     = 2,            -- always show the tab line(tab bar)
-  clipboard 	    = "unnamedplus",-- use system clipboard. It realoly works!
+  clipboard 	  = "unnamedplus",-- use system clipboard. It realoly works!
 
 
   ---------- edit config ----------
