@@ -28,6 +28,8 @@ return {
             local lspconfig = require('lspconfig')
             local mason_lspconfig = require('mason-lspconfig')
 
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(args)
@@ -42,7 +44,7 @@ return {
                 ensure_installed = {
                     'lua_ls',
                     'pylsp',
-                    'clangd',
+                    -- 'clangd',
                     'marksman',
                     'rust_analyzer',
                 },
@@ -52,37 +54,38 @@ return {
                 handlers = {
                     function(server_name)
                         lspconfig[server_name].setup({
-                            on_attach = on_attach,
+                            capabilities = capabilities,
                         })
                     end,
 
-                    ["clangd"] = function()
-                        lspconfig.clangd.setup({
-                            on_attach = on_attach,
-                            cmd = {
-                                "clangd",
-                                "--background-index",
-                                "--clang-tidy",
-                                "--header-insertion=iwyu",
-                                "--completion-style=detailed",
-                                "--function-arg-placeholders",
-                                "--fallback-style=llvm",
-                                "--inlay-hints=true",
-                            },
-                            init_options = {
-                                usePlaceholders = true,
-                                completeUnimported = true,
-                                clangdFileStatus = true,
-                            },
-                            capabilities = {
-                                offsetEncoding = "utf-8",
-                            },
-                        })
-                    end,
+                    -- ["clangd"] = function()
+                    --     lspconfig.clangd.setup({
+                    --         on_attach = on_attach,
+                    --         cmd = {
+                    --             "clangd",
+                    --             "/opt/homebrew/opt/llvm/bin/clangd",
+                    --             "--background-index",
+                    --             "--clang-tidy",
+                    --             "--header-insertion=iwyu",
+                    --             "--completion-style=detailed",
+                    --             "--function-arg-placeholders",
+                    --             "--fallback-style=llvm",
+                    --             "--inlay-hints=true",
+                    --         },
+                    --         init_options = {
+                    --             usePlaceholders = true,
+                    --             completeUnimported = true,
+                    --             clangdFileStatus = true,
+                    --         },
+                    --         capabilities = {
+                    --             offsetEncoding = "utf-8",
+                    --         },
+                    --     })
+                    -- end,
 
                     ["rust_analyzer"] = function()
                         lspconfig.rust_analyzer.setup({
-                            on_attach = on_attach,
+                            capabilities = capabilities,
                             settings = {
                                 ["rust-analyzer"] = {
                                     inlayHints = {
@@ -111,7 +114,7 @@ return {
 
                     ["lua_ls"] = function()
                         lspconfig.lua_ls.setup({
-                            on_attach = on_attach,
+                            capabilities = capabilities,
                             settings = {
                                 Lua = {
                                     hint = { enable = true },
@@ -129,12 +132,9 @@ return {
                         })
                     end,
 
-                    -- ** Pylsp 配置 **
-                    -- 注意：pylsp 原生不支持 inlay hints，通常需要 pyright 或 basedpyright
-                    -- 这里保持你的原样，但加上 on_attach
                     ["pylsp"] = function()
                         lspconfig.pylsp.setup({
-                            on_attach = on_attach,
+                            capabilities = capabilities,
                             settings = {
                                 pylsp = {
                                     plugins = {
@@ -152,10 +152,31 @@ return {
                     -- ** Marksman 配置 **
                     ["marksman"] = function()
                         lspconfig.marksman.setup({
-                            on_attach = on_attach,
+                            capabilities = capabilities,
                         })
                     end,
                 }
+            })
+
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+
+                cmd = {
+                    "/opt/homebrew/opt/llvm/bin/clangd",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                    "--completion-style=detailed",
+                    "--function-arg-placeholders",
+                    "--fallback-style=llvm",
+                    "--query-driver=/opt/homebrew/opt/llvm/bin/clang++",
+                },
+                init_options = {
+                    usePlaceholders = true,
+                    completeUnimported = true,
+                    clangdFileStatus = true,
+                    fallbackFlags = { "-std=c++20 "},
+                },
             })
 
             -- display hover information about the symbol under the cursor
