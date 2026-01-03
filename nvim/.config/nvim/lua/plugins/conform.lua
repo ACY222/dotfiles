@@ -23,10 +23,20 @@ return {
 				},
 
 				formatters = {
+					-- C/C++
 					["clang-format"] = {
 						prepend_args = {
 							"--style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4}",
 						},
+					},
+
+					-- markdown
+					["prettier"] = {
+						prepend_args = { "--tab-width", "4" },
+					},
+
+					["stylua"] = {
+						prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
 					},
 				},
 			})
