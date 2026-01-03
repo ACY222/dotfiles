@@ -22,7 +22,7 @@ return {
         sync_install = true,
         ensure_installed = {
           -- my main languages
-          "c", "cpp", "python", "markdown",
+          "c", "cpp", "python", "markdown", "typst",
           -- my config languages
           "lua", "vim",
         },
