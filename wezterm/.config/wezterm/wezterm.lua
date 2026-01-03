@@ -36,8 +36,9 @@ config = {
   -- font
   font = wezterm.font_with_fallback({
     'Consolas',
-    'LXGW Wenkai GB',
+    'LXGW WenKai Mono',
     'Fira Code',
+    'Symbols Nerd Font Mono',
   }),
   font_size = 14.0,
 
