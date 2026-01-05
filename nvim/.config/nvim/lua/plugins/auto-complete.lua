@@ -1,20 +1,18 @@
 return {
     {
         -- Portable package manager for Neovim
-        -- Easy install and manage LSP servers, DAP servers, linters and formatters
+        -- Easy to install and manage LSP, DAP, linters and formatters
         "mason-org/mason.nvim",
         lazy = false,
-        config = function()
-            require("mason").setup({
-                ui = {
-                    icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗",
-                    },
+        opts = {
+            ui = {
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
                 },
-            })
-        end,
+            },
+        },
     },
     {
         "neovim/nvim-lspconfig",
@@ -23,182 +21,124 @@ return {
             { "mason-org/mason-lspconfig.nvim", build = ":MasonUpdate" },
             "saghen/blink.cmp",
         },
-
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             local lspconfig = require("lspconfig")
             local mason_lspconfig = require("mason-lspconfig")
 
             local capabilities = require("blink.cmp").get_lsp_capabilities()
 
+            local servers = {
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            hint = { enable = true },
+                            diagnostics = { globals = { "vim" } },
+                            workspace = { checkThirdParty = false },
+                            telemetry = { enable = false },
+                        },
+                    },
+                },
+                pylsp = {
+                    settings = {
+                        pylsp = {
+                            plugins = {
+                                flake8 = { enabled = true, maxLineLength = 120 },
+                                pylsp_mypy = { enabled = true, live_mode = false, strict = true },
+                                pylint = { enabled = false },
+                                pyflakes = { enabled = false },
+                                mccabe = { enabled = false },
+                            },
+                        },
+                    },
+                },
+                marksman = {},
+                rust_analyzer = {
+                    settings = {
+                        ["rust-analyzer"] = {
+                            inlayHints = { bindingHints = { enable = true } },
+                            checkOnSave = { command = "clippy" },
+                        },
+                    },
+                },
+                tinymist = {
+                    offset_encoding = "utf-8",
+                    single_file_support = true,
+                    root_dir = lspconfig.util.root_pattern("typstyle.toml", "typst.toml", ".git"),
+                    settings = {
+                        formatterMode = "typstyle",
+                        exportPdf = "onType",
+                        tinymist = {
+                            inlayHints = {
+                                enable = true,
+                                typeHints = false,
+                                parameterHints = false,
+                            },
+                        },
+                    },
+                },
+                clangd = {
+                    cmd = {
+                        "/opt/homebrew/opt/llvm/bin/clangd",
+                        "--background-index",
+                        "--clang-tidy",
+                        "--header-insertion=iwyu",
+                        "--completion-style=detailed",
+                        "--function-arg-placeholders",
+                        "--fallback-style=llvm",
+                    },
+                    init_options = {
+                        usePlaceholders = true,
+                        completeUnimported = true,
+                        clangdFileStatus = true,
+                    },
+                },
+            }
+
+            require("mason").setup({ ui = { icons = { package_installed = "✓" } } })
+
+            mason_lspconfig.setup({
+                ensure_installed = vim.tbl_keys(servers),
+                automatic_installation = true,
+
+                handlers = {
+                    function(server_name)
+                        local server = servers[server_name] or {}
+                        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+                        lspconfig[server_name].setup(server)
+                    end,
+                },
+            })
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(args)
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    -- 如果 LSP 支持 Inlay Hints，则开启
-                    if client.server_capabilities.inlayHintProvider then
-                        vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+                    local bufnr = args.buf
+
+                    if not client then
+                        return
                     end
+
+                    if client.server_capabilities.inlayHintProvider then
+                        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                    end
+
+                    local map = function(mode, lhs, rhs, desc)
+                        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+                    end
+
+                    map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
+                    -- display a list about where it is used
+                    map("n", "gr", vim.lsp.buf.references, "Goto References")
+                    map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+                    map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action (Quick Fix)")
+                    map("n", "<leader>h", vim.lsp.buf.hover, "Hover Documentation")
+                    map("n", "<leader>ih", function()
+                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                    end, "Toggle Inlay Hints")
                 end,
             })
-            mason_lspconfig.setup({
-                ensure_installed = {
-                    "lua_ls",
-                    "pylsp",
-                    -- 'clangd',
-                    "marksman",
-                    "rust_analyzer",
-                    "tinymist",
-                },
-                automatic_installation = true,
-                automatic_enable = true,
-
-                handlers = {
-                    function(server_name)
-                        lspconfig[server_name].setup({
-                            capabilities = capabilities,
-                        })
-                    end,
-
-                    ["rust_analyzer"] = function()
-                        lspconfig.rust_analyzer.setup({
-                            capabilities = capabilities,
-                            settings = {
-                                ["rust-analyzer"] = {
-                                    inlayHints = {
-                                        bindingHints = { enable = true },
-                                        chainingHints = { enable = true },
-                                        closingBraceHints = { enable = true, minLines = 25 },
-                                        closureReturnTypeHints = { enable = "always" },
-                                        lifetimeElisionHints = { enable = "always", useParameterNames = true },
-                                        maxLength = 25,
-                                        parameterHints = { enable = true },
-                                        reborrowHints = { enable = "always" },
-                                        renderColons = true,
-                                        typeHints = {
-                                            enable = true,
-                                            hideClosureInitialization = false,
-                                            hideNamedConstructor = false,
-                                        },
-                                    },
-                                    checkOnSave = {
-                                        command = "clippy",
-                                    },
-                                },
-                            },
-                        })
-                    end,
-
-                    ["lua_ls"] = function()
-                        lspconfig.lua_ls.setup({
-                            capabilities = capabilities,
-                            settings = {
-                                Lua = {
-                                    hint = { enable = true },
-                                    runtime = { version = "LuaJIT" },
-                                    diagnostics = {
-                                        globals = { "vim", "require", "opts" },
-                                    },
-                                    workspace = {
-                                        library = vim.api.nvim_get_runtime_file("", true),
-                                        checkThirdParty = false,
-                                    },
-                                    telemetry = { enable = false },
-                                },
-                            },
-                        })
-                    end,
-
-                    ["pylsp"] = function()
-                        lspconfig.pylsp.setup({
-                            capabilities = capabilities,
-                            settings = {
-                                pylsp = {
-                                    plugins = {
-                                        pylint = { enabled = false },
-                                        pyflakes = { enabled = false },
-                                        mccabe = { enabled = false },
-                                        flake8 = { enabled = true, maxLineLength = 120 },
-                                        pylsp_mypy = { enabled = true, live_mode = false, strict = true },
-                                    },
-                                },
-                            },
-                        })
-                    end,
-
-                    -- ** Marksman 配置 **
-                    ["marksman"] = function()
-                        lspconfig.marksman.setup({
-                            capabilities = capabilities,
-                        })
-                    end,
-
-                    ["tinymist"] = function()
-                        lspconfig.tinymist.setup({
-                            offset_encoding = "utf-8",
-
-                            root_dir = lspconfig.util.root_pattern("typstyle.toml", "typst.toml", ".git"),
-                            settings = {
-                                formatterMode = "typstyle",
-                                exportPdf = "onType",
-
-                                tinymist = {
-                                    inlayHints = {
-                                        enable = true,
-                                        typeHints = false,
-                                        parameterHints = false,
-                                    },
-                                },
-                            },
-
-                            single_file_support = true,
-                            capabilities = capabilities,
-                        })
-                    end,
-                },
-            })
-
-            lspconfig.clangd.setup({
-                capabilities = capabilities,
-
-                cmd = {
-                    "/opt/homebrew/opt/llvm/bin/clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                    "--header-insertion=iwyu",
-                    "--completion-style=detailed",
-                    "--function-arg-placeholders",
-                    "--fallback-style=llvm",
-                    "--query-driver=/opt/homebrew/opt/llvm/bin/clang++",
-                },
-                init_options = {
-                    usePlaceholders = true,
-                    completeUnimported = true,
-                    clangdFileStatus = true,
-                    fallbackFlags = { "-std=c++20 " },
-                },
-            })
-
-            lspconfig.tinymist.setup({
-                root_dir = lspconfig.util.root_pattern("typstyle.toml", "typst.toml", ".git"),
-                settings = {
-                    formatterMode = "typstyle",
-                    exportPdf = "onType",
-                },
-                single_file_support = true,
-            })
-
-            -- display hover information about the symbol under the cursor
-            vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, { desc = "display hover information" })
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "goto definition" })
-            vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "goto type definition" })
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "goto references" })
-            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "rename variables" })
-            -- pop-up window to show fix suggestions
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "display fix suggestions" })
-            -- go to previous/next warning or error
-            vim.keymap.set("n", "<leader>-", vim.diagnostic.goto_prev, { desc = "goto previous warning or error" })
-            vim.keymap.set("n", "<leader>=", vim.diagnostic.goto_next, { desc = "goto next warning or error" })
-
             vim.diagnostic.config({
                 signs = {
                     text = {
@@ -209,10 +149,6 @@ return {
                     },
                 },
             })
-
-            vim.keymap.set("n", "<leader>ih", function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-            end, { desc = "Toggle Inlay Hints" })
         end,
     },
     {
@@ -224,6 +160,9 @@ return {
         event = { "BufReadPost", "BufNewfile" },
         version = "1.*",
         opts = {
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
+            },
             completion = {
                 -- 'prefix' will fuzzy match on the text before the cursor
                 -- 'full' will fuzy match on the text before & after the cursor
@@ -235,9 +174,6 @@ return {
                     auto_show_delay_ms = 500,
                     -- enable this if high CPU usage
                     -- treesitter_highlighting = false,
-                },
-                sources = {
-                    default = { "lsp", "path", "snippets", "buffer" },
                 },
                 menu = {
                     auto_show = true,
