@@ -5,28 +5,30 @@ local split = function()
 end
 
 local compileRun = function()
-    vim.cmd("w")            -- save current file first
+    vim.cmd("w") -- save current file first
     -- check file type
     local fileType = vim.bo.filetype
-    if fileType == 'c' then
+    if fileType == "c" then
         split()
         vim.cmd("term gcc % -o %< && ./%< && rm %<")
-    elseif fileType == 'cpp' then
+    elseif fileType == "cpp" then
         split()
         vim.cmd("term g++ -std=c++23 -Wall % -o %< && ./%< && rm %<")
-    elseif fileType == 'python' then
+    elseif fileType == "python" then
         split()
         vim.cmd("term python3 %")
     -- elseif fileType == 'lua' then
     --     split()
     --     vim.cmd("term luajit %")        -- I don't have this tool now
-    elseif fileType == 'markdown' then
+    elseif fileType == "markdown" then
         -- vim.cmd(":InstantMarkdownPreview")
         vim.cmd(":MarkdownPreview")
-    elseif fileType == 'rust' then
+    elseif fileType == "rust" then
         split()
         vim.cmd("term cargo run -q")
+    elseif fileType == "typst" then
+        vim.cmd(":TypstPreview")
     end
 end
 
-vim.keymap.set('n', 'R', compileRun, { silent = true })
+vim.keymap.set("n", "R", compileRun, { silent = true })
