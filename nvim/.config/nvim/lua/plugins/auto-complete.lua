@@ -145,7 +145,7 @@ return {
                                     inlayHints = {
                                         enable = true,
                                         typeHints = false,
-                                        parameterHints = true,
+                                        parameterHints = false,
                                     },
                                 },
                             },
