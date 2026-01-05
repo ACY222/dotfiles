@@ -32,7 +32,8 @@ require("lazy").setup({
     require("plugins.treesitter"), -- better highlight and indent
     require("plugins.gitsigns"), -- show git signs in files
     -- lsp related
-    require("plugins.auto-complete"), -- no need to explain
+    require("plugins.lsp"),
+    require("plugins.blink"),
     require("plugins.lua"), -- lua support
     -- edit
     require("plugins.auto-pairs"), -- auto pairs, tab to escape, colorful brackets
