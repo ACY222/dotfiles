@@ -1,53 +1,53 @@
 return {
-	{
-		"stevearc/conform.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = { "mason.nvim" },
-		cmd = { "ConformInfo" },
-		config = function()
-			require("conform").setup({
+    {
+        "stevearc/conform.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "mason.nvim" },
+        cmd = { "ConformInfo" },
+        config = function()
+            require("conform").setup({
 
-				formatters_by_ft = {
-					cpp = { "clang-format" },
-					c = { "clang-format" },
-					markdown = { "prettier" },
-					typst = { "typstyle" },
-					python = { "isort", "black" },
-					lua = { "stylua" },
-				},
+                formatters_by_ft = {
+                    cpp = { "clang-format" },
+                    c = { "clang-format" },
+                    markdown = { "prettier" },
+                    typst = { "typstyle" },
+                    python = { "isort", "black" },
+                    lua = { "stylua" },
+                },
 
-				format_on_save = {
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 500,
-				},
+                format_on_save = {
+                    lsp_fallback = true,
+                    async = false,
+                    timeout_ms = 2000,
+                },
 
-				formatters = {
-					-- C/C++
-					["clang-format"] = {
-						prepend_args = {
-							"--style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4}",
-						},
-					},
+                formatters = {
+                    -- C/C++
+                    ["clang-format"] = {
+                        prepend_args = {
+                            "--style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4}",
+                        },
+                    },
 
-					-- markdown
-					["prettier"] = {
-						prepend_args = { "--tab-width", "4" },
-					},
+                    -- markdown
+                    ["prettier"] = {
+                        prepend_args = { "--tab-width", "4" },
+                    },
 
-					["stylua"] = {
-						prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
-					},
-				},
-			})
-		end,
-	},
+                    ["stylua"] = {
+                        prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
+                    },
+                },
+            })
+        end,
+    },
 
-	{
-		"zapling/mason-conform.nvim",
-		dependencies = { "mason.nvim", "conform.nvim" },
-		config = function()
-			require("mason-conform").setup()
-		end,
-	},
+    {
+        "zapling/mason-conform.nvim",
+        dependencies = { "mason.nvim", "conform.nvim" },
+        config = function()
+            require("mason-conform").setup()
+        end,
+    },
 }
