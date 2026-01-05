@@ -2,10 +2,10 @@ return {
     {
         -- Portable package manager for Neovim
         -- Easy install and manage LSP servers, DAP servers, linters and formatters
-        'mason-org/mason.nvim',
+        "mason-org/mason.nvim",
         lazy = false,
         config = function()
-            require('mason').setup({
+            require("mason").setup({
                 ui = {
                     icons = {
                         package_installed = "✓",
@@ -17,18 +17,18 @@ return {
         end,
     },
     {
-        'neovim/nvim-lspconfig',
+        "neovim/nvim-lspconfig",
         dependencies = {
-            'mason-org/mason.nvim',
-            { 'mason-org/mason-lspconfig.nvim', build = ':MasonUpdate' },
-            'saghen/blink.cmp',
+            "mason-org/mason.nvim",
+            { "mason-org/mason-lspconfig.nvim", build = ":MasonUpdate" },
+            "saghen/blink.cmp",
         },
 
         config = function()
-            local lspconfig = require('lspconfig')
-            local mason_lspconfig = require('mason-lspconfig')
+            local lspconfig = require("lspconfig")
+            local mason_lspconfig = require("mason-lspconfig")
 
-            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -42,11 +42,12 @@ return {
             })
             mason_lspconfig.setup({
                 ensure_installed = {
-                    'lua_ls',
-                    'pylsp',
+                    "lua_ls",
+                    "pylsp",
                     -- 'clangd',
-                    'marksman',
-                    'rust_analyzer',
+                    "marksman",
+                    "rust_analyzer",
+                    "tinymist",
                 },
                 automatic_installation = true,
                 automatic_enable = true,
@@ -57,31 +58,6 @@ return {
                             capabilities = capabilities,
                         })
                     end,
-
-                    -- ["clangd"] = function()
-                    --     lspconfig.clangd.setup({
-                    --         on_attach = on_attach,
-                    --         cmd = {
-                    --             "clangd",
-                    --             "/opt/homebrew/opt/llvm/bin/clangd",
-                    --             "--background-index",
-                    --             "--clang-tidy",
-                    --             "--header-insertion=iwyu",
-                    --             "--completion-style=detailed",
-                    --             "--function-arg-placeholders",
-                    --             "--fallback-style=llvm",
-                    --             "--inlay-hints=true",
-                    --         },
-                    --         init_options = {
-                    --             usePlaceholders = true,
-                    --             completeUnimported = true,
-                    --             clangdFileStatus = true,
-                    --         },
-                    --         capabilities = {
-                    --             offsetEncoding = "utf-8",
-                    --         },
-                    --     })
-                    -- end,
 
                     ["rust_analyzer"] = function()
                         lspconfig.rust_analyzer.setup({
@@ -107,8 +83,8 @@ return {
                                     checkOnSave = {
                                         command = "clippy",
                                     },
-                                }
-                            }
+                                },
+                            },
                         })
                     end,
 
@@ -118,9 +94,9 @@ return {
                             settings = {
                                 Lua = {
                                     hint = { enable = true },
-                                    runtime = { version = 'LuaJIT' },
+                                    runtime = { version = "LuaJIT" },
                                     diagnostics = {
-                                        globals = { 'vim', 'require', 'opts' },
+                                        globals = { "vim", "require", "opts" },
                                     },
                                     workspace = {
                                         library = vim.api.nvim_get_runtime_file("", true),
@@ -143,9 +119,9 @@ return {
                                         mccabe = { enabled = false },
                                         flake8 = { enabled = true, maxLineLength = 120 },
                                         pylsp_mypy = { enabled = true, live_mode = false, strict = true },
-                                    }
-                                }
-                            }
+                                    },
+                                },
+                            },
                         })
                     end,
 
@@ -155,7 +131,30 @@ return {
                             capabilities = capabilities,
                         })
                     end,
-                }
+
+                    ["tinymist"] = function()
+                        lspconfig.tinymist.setup({
+                            offset_encoding = "utf-8",
+
+                            root_dir = lspconfig.util.root_pattern("typstyle.toml", "typst.toml", ".git"),
+                            settings = {
+                                formatterMode = "typstyle",
+                                exportPdf = "onType",
+
+                                tinymist = {
+                                    inlayHints = {
+                                        enable = true,
+                                        typeHints = false,
+                                        parameterHints = true,
+                                    },
+                                },
+                            },
+
+                            single_file_support = true,
+                            capabilities = capabilities,
+                        })
+                    end,
+                },
             })
 
             lspconfig.clangd.setup({
@@ -175,29 +174,30 @@ return {
                     usePlaceholders = true,
                     completeUnimported = true,
                     clangdFileStatus = true,
-                    fallbackFlags = { "-std=c++20 "},
+                    fallbackFlags = { "-std=c++20 " },
                 },
             })
 
+            lspconfig.tinymist.setup({
+                root_dir = lspconfig.util.root_pattern("typstyle.toml", "typst.toml", ".git"),
+                settings = {
+                    formatterMode = "typstyle",
+                    exportPdf = "onType",
+                },
+                single_file_support = true,
+            })
+
             -- display hover information about the symbol under the cursor
-            vim.keymap.set('n', '<leader>h', vim.lsp.buf.hover,
-                { desc = 'display hover information' })
-            vim.keymap.set('n', 'gd', vim.lsp.buf.definition,
-                { desc = 'goto definition' })
-            vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition,
-                { desc = 'goto type definition' })
-            vim.keymap.set('n', 'gr', vim.lsp.buf.references,
-                { desc = 'goto references' })
-            vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,
-                { desc = 'rename variables' })
+            vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, { desc = "display hover information" })
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "goto definition" })
+            vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "goto type definition" })
+            vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "goto references" })
+            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "rename variables" })
             -- pop-up window to show fix suggestions
-            vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,
-                { desc = 'display fix suggestions' })
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "display fix suggestions" })
             -- go to previous/next warning or error
-            vim.keymap.set('n', '<leader>-', vim.diagnostic.goto_prev,
-                { desc = 'goto previous warning or error' })
-            vim.keymap.set('n', '<leader>=', vim.diagnostic.goto_next,
-                { desc = 'goto next warning or error' })
+            vim.keymap.set("n", "<leader>-", vim.diagnostic.goto_prev, { desc = "goto previous warning or error" })
+            vim.keymap.set("n", "<leader>=", vim.diagnostic.goto_next, { desc = "goto next warning or error" })
 
             vim.diagnostic.config({
                 signs = {
@@ -207,37 +207,37 @@ return {
                         [vim.diagnostic.severity.HINT] = "⚑",
                         [vim.diagnostic.severity.INFO] = "»",
                     },
-                }
+                },
             })
 
-            vim.keymap.set('n', '<leader>ih', function()
+            vim.keymap.set("n", "<leader>ih", function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-            end, { desc = 'Toggle Inlay Hints' })
+            end, { desc = "Toggle Inlay Hints" })
         end,
     },
     {
-        'Saghen/blink.cmp',
+        "Saghen/blink.cmp",
         dependencies = {
-            'rafamadriz/friendly-snippets',
-            'xzbdmw/colorful-menu.nvim',
+            "rafamadriz/friendly-snippets",
+            "xzbdmw/colorful-menu.nvim",
         },
-        event = { 'BufReadPost', 'BufNewfile' },
-        version = '1.*',
+        event = { "BufReadPost", "BufNewfile" },
+        version = "1.*",
         opts = {
             completion = {
                 -- 'prefix' will fuzzy match on the text before the cursor
                 -- 'full' will fuzy match on the text before & after the cursor
-                keyword = { range = 'full' },
+                keyword = { range = "full" },
                 -- select automatically, because I use <C-y> to insert, and don't auto insert
-                list = { selection = {  preselect = true, auto_insert = false } },
-                documentation =  {    -- no documentation showed
+                list = { selection = { preselect = true, auto_insert = false } },
+                documentation = { -- no documentation showed
                     auto_show = true,
                     auto_show_delay_ms = 500,
                     -- enable this if high CPU usage
                     -- treesitter_highlighting = false,
                 },
                 sources = {
-                    default = { 'lsp', 'path', 'snippets', 'buffer' },
+                    default = { "lsp", "path", "snippets", "buffer" },
                 },
                 menu = {
                     auto_show = true,
@@ -258,14 +258,14 @@ return {
             },
 
             keymap = {
-                preset = 'none',    -- disable the default keymap
+                preset = "none", -- disable the default keymap
                 -- use <C-n>/<C-p> to select suggestions
-                ['<C-N>'] = { 'select_next', 'fallback' },
-                ['<C-P>'] = { 'select_prev', 'fallback' },
-                ['<C-Y>'] = { 'accept', 'fallback' },
+                ["<C-N>"] = { "select_next", "fallback" },
+                ["<C-P>"] = { "select_prev", "fallback" },
+                ["<C-Y>"] = { "accept", "fallback" },
                 -- use <Tab>/<S-Tab> to edit snippets to avoid confliction
-                ['<Tab>'] = { 'snippet_forward', 'fallback' },
-                ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+                ["<Tab>"] = { "snippet_forward", "fallback" },
+                ["<S-Tab>"] = { "snippet_backward", "fallback" },
             },
 
             -- use noice's cmdline menu
@@ -273,7 +273,7 @@ return {
                 enabled = false,
             },
 
-            appearance = { nerd_font_variant = 'mono' },
+            appearance = { nerd_font_variant = "mono" },
         },
     },
 }
