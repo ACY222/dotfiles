@@ -128,10 +128,6 @@ return {
                         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
                     end
 
-                    map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
-                    -- display a list about where it is used
-                    map("n", "gr", vim.lsp.buf.references, "Goto References")
-                    map("n", "gt", vim.lsp.buf.type_definition, "Goto Type Definition")
                     map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
                     map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action (Quick Fix)")
                     map("n", "<leader>h", vim.lsp.buf.hover, "Hover Documentation")
