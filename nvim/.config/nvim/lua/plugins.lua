@@ -48,7 +48,6 @@ require("lazy").setup({
     require("plugins.trouble"), -- showing diagnostics, references, quickfix and so on
     -- navigation
     require("plugins.flash"), -- enhanced f, t, and word-search
-    require("plugins.yazi"), -- file manager
     require("plugins.outline"), -- code outline window
     -- tools
     require("plugins.leetcode"),
