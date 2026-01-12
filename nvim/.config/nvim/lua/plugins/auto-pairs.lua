@@ -13,7 +13,7 @@ return {
                     close = true,
                     pair = "<>",
                     disable_command_mode = true,
-                    disabled_filetypes = { "c", "cpp", "python", "rust" },
+                    disabled_filetypes = { "c", "cpp", "python", "rust", "typst" },
                 },
                 [">"] = {
                     escape = true,

@@ -43,11 +43,12 @@ return {
                     settings = {
                         pylsp = {
                             plugins = {
-                                flake8 = { enabled = true, maxLineLength = 120 },
+                                flake8 = { enabled = false },
                                 pylsp_mypy = { enabled = true, live_mode = false, strict = true },
                                 pylint = { enabled = false },
                                 pyflakes = { enabled = false },
                                 mccabe = { enabled = false },
+                                pycodestyle = { enabled = false },
                             },
                         },
                     },
