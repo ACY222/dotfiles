@@ -30,7 +30,7 @@ return {
         modes = {
             -- use enhanced `t`, `f` in single line
             char = {
-                enabled = true,
+                enabled = false,
                 jump_labels = true,
                 multi_line = false,
             },
