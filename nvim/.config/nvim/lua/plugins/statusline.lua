@@ -32,7 +32,7 @@ return {
                     newfile_status = true,
                     -- 0: no path, 1: relative path, 2: absolute path
                     -- 3: absolute path, ~ as home, 4: parent_dir/filename
-                    path = 3,
+                    path = 4,
                     shorting_target = 40, -- the max length
                 },
             },
@@ -43,7 +43,7 @@ return {
                 },
             },
             lualine_x = { "lsp_status" },
-            lualine_y = { "filesize", "filetype" },
+            lualine_y = { "filesize" },
             lualine_z = { "location", "progress" },
         },
         tabline = {},

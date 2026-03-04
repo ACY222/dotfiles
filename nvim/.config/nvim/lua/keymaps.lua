@@ -13,16 +13,17 @@ local mappings = {
     { from = "H", to = "^", mode = ov },
     { from = "L", to = "$", mode = ov },
 
-    -- emacs like editing keymap
+    -- emacs like editing keymap, these will interfere with dot operation
     -- <C-c> quit insert mode
     -- <C-i> insert a tab
     -- <C-j>/<C-m> start new line
     -- <C-t>/<C-d> indent/unindent in insert mode
     -- <C-r> {register} enter the content in register
-    { from = "<C-a>", to = "<Esc>I", mode = insert }, -- goto the begining of the line
-    { from = "<C-e>", to = "<Esc>A", mode = insert }, -- goto the end of the line
+    { from = "<C-a>", to = "<C-o>^", mode = insert }, -- goto the begining of the line
+    { from = "<C-e>", to = "<C-o>$", mode = insert }, -- goto the end of the line
     { from = "<C-b>", to = "<Left>", mode = insert }, -- a character backward
     { from = "<C-f>", to = "<Right>", mode = insert }, -- a character forward
+
     -- edit the next placeholder in normal mode
     {
         from = "<leader><leader>",
@@ -82,17 +83,21 @@ vim.api.nvim_create_autocmd("FileType", {
         local opts = { buffer = true, silent = true, noremap = true }
         vim.keymap.set("i", "¥", "$$<left>", opts) -- enable $$ in Chinese mode
         vim.keymap.set("i", "·", "``<left>", opts) -- enable `` in Chinese mode
-        vim.keymap.set("i", ",r", "<++>", opts) -- create placeholder
-        vim.keymap.set("i", ",i", "**<left>", opts) -- italic
-        vim.keymap.set("i", ",b", "****<left><left>", opts) -- bold
-        vim.keymap.set("i", ",s", "~~~~<left><left>", opts) -- sliced
-        vim.keymap.set("i", ",c", "```<Enter><++><Enter>```<Enter><Esc>3kA", opts) -- big code block
-
         vim.keymap.set("i", ",.", "- [ ] ", opts) -- check mark
         vim.keymap.set("n", " m", "/]<CR>hrx", opts) -- finish check mark
+    end,
+})
 
-        vim.keymap.set("i", ",p", "![](<++>) <++><Esc>F[a", opts) -- picture
-        vim.keymap.set("i", ",l", "[](<++>) <++><Esc>F[a", opts) -- link
+local typst_group = vim.api.nvim_create_augroup("TypstKeymaps", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "typst",
+    group = typst_group,
+    callback = function()
+        local opts = { buffer = true, silent = true, noremap = true }
+        vim.keymap.set("i", "¥", "$$<left>", opts) -- enable $$ in Chinese mode
+        vim.keymap.set("i", "·", "``<left>", opts) -- enable `` in Chinese mode
+        vim.keymap.set("i", ",.", "- [ ] ", opts) -- check mark
+        vim.keymap.set("n", " m", "/]<CR>hrx", opts) -- finish check mark
     end,
 })
 

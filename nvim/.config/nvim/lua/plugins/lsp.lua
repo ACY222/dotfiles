@@ -39,20 +39,9 @@ return {
                         },
                     },
                 },
-                pylsp = {
-                    settings = {
-                        pylsp = {
-                            plugins = {
-                                flake8 = { enabled = false },
-                                pylsp_mypy = { enabled = true, live_mode = false, strict = true },
-                                pylint = { enabled = false },
-                                pyflakes = { enabled = false },
-                                mccabe = { enabled = false },
-                                pycodestyle = { enabled = false },
-                            },
-                        },
-                    },
-                },
+                -- use default settings
+                ruff = {},
+                pyright = {},
                 marksman = {},
                 rust_analyzer = {
                     settings = {
@@ -131,6 +120,8 @@ return {
 
                     map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
                     map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action (Quick Fix)")
+                    -- press again to focus on the documentation, then you can
+                    -- move as normal, and use `q` to quit
                     map("n", "<leader>h", vim.lsp.buf.hover, "Hover Documentation")
                     map("n", "<leader>-", function()
                         vim.diagnostic.jump({ count = -1, float = true })
