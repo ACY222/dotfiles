@@ -146,8 +146,6 @@ source ~/.config/zsh/vi.zsh
 eval "$(zoxide init --cmd cd zsh)"              # zoxide, the better cd command
 eval "$(starship init zsh)"                     # starship, prompt UI
 
-export TLDR_AUTO_UPDATE_DISABLED=1
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # md - copy last command to clipboard
 MD_CMD_NAME="md"
