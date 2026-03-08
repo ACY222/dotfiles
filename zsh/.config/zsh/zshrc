@@ -145,8 +145,3 @@ source ~/.config/zsh/vi.zsh
 
 eval "$(zoxide init --cmd cd zsh)"              # zoxide, the better cd command
 eval "$(starship init zsh)"                     # starship, prompt UI
-
-
-# md - copy last command to clipboard
-MD_CMD_NAME="md"
-source "$HOME/.md/md.sh"
