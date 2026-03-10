@@ -23,6 +23,8 @@ local mappings = {
     { from = "<C-e>", to = "<C-o>$", mode = insert }, -- goto the end of the line
     { from = "<C-b>", to = "<Left>", mode = insert }, -- a character backward
     { from = "<C-f>", to = "<Right>", mode = insert }, -- a character forward
+    -- { from = "<C-p>", to = "<Up>", mode = insert },
+    { from = "<C-n>", to = "<Down>", mode = insert },
 
     -- edit the next placeholder in normal mode
     {
