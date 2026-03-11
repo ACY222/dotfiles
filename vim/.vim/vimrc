@@ -156,8 +156,10 @@ nnoremap Q :q<CR>
 " Use C-w, C-l to delete a word/letter in insert mode and cmd-line mode
 inoremap <C-w> <esc>lcb
 inoremap <C-h> <Backspace>
-inoremap <C-a> <esc>I
-inoremap <C-e> <esc>A
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
 
 " find next placeholder(<++>) and edit it
 nnoremap <leader><leader> /<++><CR>c4l
@@ -196,7 +198,6 @@ autocmd FileType vim nnoremap <leader>cl :PlugClean<CR>
 " plugins config {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'      " <C-n>, directory overview
 Plug 'jiangmiao/auto-pairs'
 " vim themes
@@ -229,16 +230,6 @@ call plug#end()
 
 " LeaderF settings {{{
 " let g:Lf_ShortcutF = '<C-p>'
-" }}}
-
-
-" tagbar settings {{{
-noremap <leader>t :TagbarToggle<CR>
-let g:tagbar_width = 32
-let g:tagbar_ctags_bin  = 'ctags'
-let g:tagbar_autofocus  = 1
-let g:tagbar_left		= 1
-let g:tagbar_sort		= 0
 " }}}
 
 
