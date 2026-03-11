@@ -10,9 +10,6 @@ alias gm='git merge'
 alias gr='git rebase'
 alias lg='lazygit'
 
-# neovim
-alias vim='nvim'
-
 # tmux
 alias tls='tmux ls'
 alias tnew='tmux new -s'
