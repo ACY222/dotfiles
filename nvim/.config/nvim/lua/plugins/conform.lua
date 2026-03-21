@@ -25,7 +25,16 @@ return {
                     -- C/C++
                     ["clang-format"] = {
                         prepend_args = {
-                            "--style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4}",
+                            "--style={" .. [[
+                                BasedOnStyle: LLVM,
+                                IndentCaseLabels: true,
+                                IndentWidth: 4,
+                                TabWidth: 4,
+                                AccessModifierOffset: -4,
+                                PointerAlignment: Right,
+                                AlwaysBreakTemplateDeclarations: Yes,
+                                BreakBeforeBraces: Attach
+                            ]] .. "}",
                         },
                     },
 
