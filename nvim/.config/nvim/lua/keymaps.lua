@@ -76,24 +76,11 @@ for _, mapping in ipairs(mappings) do
     vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, { noremap = true, silent = true })
 end
 
--- Markdown keymaps config
-local markdown_group = vim.api.nvim_create_augroup("MarkdownKeymaps", { clear = true })
+-- Markdown & Typst keymaps config
+local my_docs_group = vim.api.nvim_create_augroup("Documents Keymaps", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "markdown",
-    group = markdown_group,
-    callback = function()
-        local opts = { buffer = true, silent = true, noremap = true }
-        vim.keymap.set("i", "¥", "$$<left>", opts) -- enable $$ in Chinese mode
-        vim.keymap.set("i", "·", "``<left>", opts) -- enable `` in Chinese mode
-        vim.keymap.set("i", ",.", "- [ ] ", opts) -- check mark
-        vim.keymap.set("n", " m", "/]<CR>hrx", opts) -- finish check mark
-    end,
-})
-
-local typst_group = vim.api.nvim_create_augroup("TypstKeymaps", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "typst",
-    group = typst_group,
+    pattern = { "markdown", "types" },
+    group = my_docs_group,
     callback = function()
         local opts = { buffer = true, silent = true, noremap = true }
         vim.keymap.set("i", "¥", "$$<left>", opts) -- enable $$ in Chinese mode

@@ -27,13 +27,30 @@ return {
                         prepend_args = {
                             "--style={" .. [[
                                 BasedOnStyle: LLVM,
-                                IndentCaseLabels: true,
                                 IndentWidth: 4,
                                 TabWidth: 4,
+                                UseTab: Never,
+                                ColumnLimit: 80,
                                 AccessModifierOffset: -4,
+
+                                BreakBeforeBraces: Attach,
+                                AlignAfterOpenBracket: Align,
                                 PointerAlignment: Right,
-                                AlwaysBreakTemplateDeclarations: Yes,
-                                BreakBeforeBraces: Attach
+                                AlignConsecutiveAssignments: false,
+                                AlignConsecutiveDeclarations: false,
+                                AlignConsecutiveShortCaseStatements: {
+                                    Enabled: true,
+                                    AcrossEmptyLines: true,
+                                    AcrossComments: true,
+                                    AlignCaseColons: false
+                                },
+                                AlignOperands: Align,
+                                BreakBeforeBinaryOperators: NonAssignment,
+                                AlignTrailingComments: false,
+
+                                AllowShortCaseLabelsOnASingleLine: true,
+                                IndentCaseLabels: true,
+                                AlwaysBreakTemplateDeclarations: true,
                             ]] .. "}",
                         },
                     },
