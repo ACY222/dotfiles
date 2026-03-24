@@ -32,6 +32,7 @@ return {
                                 UseTab: Never,
                                 ColumnLimit: 80,
                                 AccessModifierOffset: -4,
+                                IndentCaseLabels: true,
 
                                 BreakBeforeBraces: Attach,
                                 AlignAfterOpenBracket: Align,
@@ -49,8 +50,10 @@ return {
                                 AlignTrailingComments: false,
 
                                 AllowShortCaseLabelsOnASingleLine: true,
-                                IndentCaseLabels: true,
-                                AlwaysBreakTemplateDeclarations: true,
+                                AllowShortIfStatementsOnASingleLine: AllIfsAndElse,
+                                AllowShortFunctionsOnASingleLine: All,
+                                AllowShortBlocksOnASingleLine: Inline,
+                                AlwaysBreakTemplateDeclarations: Yes
                             ]] .. "}",
                         },
                     },
