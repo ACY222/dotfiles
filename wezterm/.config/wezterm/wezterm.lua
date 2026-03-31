@@ -5,7 +5,7 @@ local is_macos = wezterm.target_triple == "aarch64-apple-darwin" or wezterm.targ
 
 local config = wezterm.config_builder()
 
-config = {
+local settings = {
     ---------- appearance ----------
     -- tab bar, title bar, scroll bar, padding
     tab_max_width = 100,
@@ -56,10 +56,12 @@ config = {
         { key = "Enter", mods = "ALT", action = wezterm.action.ToggleFullScreen },
         { key = "Escape", mods = "ALT", action = wezterm.action.ActivateCopyMode },
         -- { key = '<++>', modes = '<++>', action = <++> },
-        -- { key = '<++>', modes = '<++>', action = <++> },
-        -- { key = '<++>', modes = '<++>', action = <++> },
     },
 }
+
+for key, value in pairs(settings) do
+    config[key] = value
+end
 
 -- set default program and working directory based on platform
 if is_wsl then

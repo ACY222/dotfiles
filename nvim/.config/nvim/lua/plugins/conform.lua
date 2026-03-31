@@ -36,7 +36,6 @@ return {
 
                                 BreakBeforeBraces: Attach,
                                 AlignAfterOpenBracket: Align,
-                                PointerAlignment: Right,
                                 AlignConsecutiveAssignments: false,
                                 AlignConsecutiveDeclarations: false,
                                 AlignConsecutiveShortCaseStatements: {
@@ -49,10 +48,13 @@ return {
                                 BreakBeforeBinaryOperators: NonAssignment,
                                 AlignTrailingComments: false,
 
+                                PointerAlignment: Right,
+                                ReferenceAlignment: Left,
+
                                 AllowShortCaseLabelsOnASingleLine: true,
                                 AllowShortIfStatementsOnASingleLine: AllIfsAndElse,
                                 AllowShortFunctionsOnASingleLine: All,
-                                AllowShortBlocksOnASingleLine: Inline,
+                                AllowShortBlocksOnASingleLine: Always,
                                 AlwaysBreakTemplateDeclarations: Yes
                             ]] .. "}",
                         },
