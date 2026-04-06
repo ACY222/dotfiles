@@ -46,7 +46,7 @@ local settings = {
     window_close_confirmation = "NeverPrompt",
 
     -- theme
-    color_scheme = "Dracula (Official)",
+    color_scheme = "Catppuccin Macchiato",
 
     ---------- key bindings ----------
     keys = {

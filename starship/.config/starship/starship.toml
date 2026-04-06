@@ -1,0 +1,102 @@
+# starship configuration file
+palette = "catppuccin_mocha"
+## General config
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+# Inserts a blank line between shell prompts
+format = """
+$directory\
+$git_branch$git_commit$git_state$git_status\
+$fill\
+$cmd_duration\
+$package\
+$c$cpp$python$lua\
+$time
+$character
+"""
+
+add_newline = true
+
+## Nerd Font Symbols Preset
+
+[directory]
+style = "bold blue"
+truncation_length = 5       # the number of parents folders
+truncate_to_repo = false    # don't truncate to the root of git repo
+read_only = " 󰌾"
+
+[git_branch]
+symbol = " "
+style = "bold mauve"
+
+[git_commit]
+tag_symbol = '  '
+style = "bold pink"
+
+[git_status]
+style = "bold red"
+
+[fill]
+disabled = false
+
+[cmd_duration]
+style = "bold yellow"
+
+[time]
+disabled = false
+format = 'at[ $time]($style) '
+style = "bold subtext0"
+
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
+
+# common languages
+[c]
+symbol = " "
+style = "bold blue"
+
+[cpp]
+symbol = " "
+style = "bold sapphire"
+
+[lua]
+symbol = " "
+style = "bold teal"
+
+[python]
+symbol = " "
+style = "bold yellow"
+
+[package]
+symbol = "󰏗 "
+style = "bold flamingo"
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
