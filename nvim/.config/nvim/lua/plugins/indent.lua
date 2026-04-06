@@ -31,8 +31,8 @@ return {
                 enable = false,
             },
             line_num = { -- highlight line number in current domain
-                enable = true,
-                use_treesitter = true,
+                enable = false,
+                -- use_treesitter = true,
             },
         })
     end,
