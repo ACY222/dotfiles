@@ -34,7 +34,14 @@ return {
                                 AccessModifierOffset: -4,
                                 IndentCaseLabels: true,
 
+                                BreakBeforeBinaryOperators: NonAssignment,
                                 BreakBeforeBraces: Attach,
+                                BreakBeforeCloseBracketBracedList: true,
+                                BreakBeforeCloseBracketFunction: true,
+                                BreakBeforeCloseBracketIf: true,
+                                BreakBeforeCloseBracketLoop: true,
+                                BreakBeforeCloseBracketSwitch: true,
+
                                 AlignAfterOpenBracket: Align,
                                 AlignConsecutiveAssignments: false,
                                 AlignConsecutiveDeclarations: false,
@@ -45,7 +52,6 @@ return {
                                     AlignCaseColons: false
                                 },
                                 AlignOperands: Align,
-                                BreakBeforeBinaryOperators: NonAssignment,
                                 AlignTrailingComments: false,
 
                                 PointerAlignment: Right,
@@ -53,9 +59,11 @@ return {
 
                                 AllowShortCaseLabelsOnASingleLine: true,
                                 AllowShortIfStatementsOnASingleLine: AllIfsAndElse,
-                                AllowShortFunctionsOnASingleLine: All,
+                                AllowShortFunctionsOnASingleLine: None,
                                 AllowShortBlocksOnASingleLine: Always,
-                                AlwaysBreakTemplateDeclarations: Yes
+                                AlwaysBreakTemplateDeclarations: Yes,
+
+                                SpaceBeforeCpp11BracedList: true,
                             ]] .. "}",
                         },
                     },
