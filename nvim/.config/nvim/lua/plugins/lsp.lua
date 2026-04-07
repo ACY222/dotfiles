@@ -54,7 +54,30 @@ return {
                 tinymist = {
                     offset_encoding = "utf-8",
                     single_file_support = true,
-                    root_dir = lspconfig.util.root_pattern("typstyle.toml", "typst.toml", ".git"),
+
+                    root_dir = function(fname)
+                        return lspconfig.root_pattern("main.typ", "template.typ", "typst.toml", ".git")(fname)
+                            or vim.fn.getcwd()
+                    end,
+                    -- root_dir = lspconfig.util.root_pattern("typstyle.toml", "typst.toml", ".git"),
+                    on_attach = function(client, bufnr)
+                        vim.keymap.set("n", "<leader>tp", function()
+                            client:exec_cmd({
+                                title = "pin",
+                                command = "tinymist.pinMain",
+                                arguments = { vim.api.nvim_buf_get_name(0) },
+                            }, { bufnr = bufnr })
+                        end, { desc = "[T]inymist [P]in", noremap = true })
+
+                        vim.keymap.set("n", "<leader>tu", function()
+                            client:exec_cmd({
+                                title = "unpin",
+                                command = "tinymist.pinMain",
+                                arguments = { vim.v.null },
+                            }, { bufnr = bufnr })
+                        end, { desc = "[T]inymist [U]npin", noremap = true })
+                    end,
+
                     settings = {
                         formatterMode = "typstyle",
                         exportPdf = "onType",
@@ -65,6 +88,7 @@ return {
                                 parameterHints = false,
                             },
                         },
+                        exportRoot = "main.typ",
                     },
                 },
                 clangd = {
@@ -132,6 +156,24 @@ return {
                     map("n", "<leader>ih", function()
                         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
                     end, "Toggle Inlay Hints")
+
+                    if client and client.name == "tinymist" then
+                        map("n", "<leader>tp", function()
+                            client:exec_cmd({
+                                title = "pin",
+                                command = "tinymist.pinMain",
+                                arguments = { vim.api.nvim_buf_get_name(0) },
+                            }, { bufnr = bufnr })
+                        end, "[T]inymist [P]in")
+
+                        map("n", "<leader>tu", function()
+                            client:exec_cmd({
+                                title = "unpin",
+                                command = "tinymist.pinMain",
+                                arguments = { vim.v.null },
+                            }, { bufnr = bufnr })
+                        end, "[T]inymist [U]npin")
+                    end
                 end,
             })
             vim.diagnostic.config({
