@@ -1,8 +1,9 @@
 return {
     "mbbill/undotree",
-    keys = {
-        { "<leader>u", vim.cmd.UndotreeToggle, desc = "Toggle UndoTree" },
-    },
+    -- this plugin is used rarely
+    -- keys = {
+    --     { "<leader>u", vim.cmd.UndotreeToggle, desc = "Toggle UndoTree" },
+    -- },
     config = function()
         vim.g.undotree_DiffAutoOpen = 1
         vim.g.undotree_DiffAutoOpen = 1 -- auto open diff window

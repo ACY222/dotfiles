@@ -59,7 +59,7 @@ return {
 
                                 AllowShortCaseLabelsOnASingleLine: true,
                                 AllowShortIfStatementsOnASingleLine: AllIfsAndElse,
-                                AllowShortFunctionsOnASingleLine: None,
+                                AllowShortFunctionsOnASingleLine: InlineOnly,
                                 AllowShortBlocksOnASingleLine: Always,
                                 AlwaysBreakTemplateDeclarations: Yes,
 
