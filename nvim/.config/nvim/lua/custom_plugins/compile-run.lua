@@ -1,10 +1,9 @@
 local split = function()
-    vim.cmd("set splitbelow")
     vim.cmd("sp")
-    vim.cmd("res -5")
+    vim.cmd("resize -10")
 end
 
-local compileRun = function()
+vim.api.nvim_create_user_command("CompileAndRun", function()
     vim.cmd("w") -- save current file first
     -- check file type
     local fileType = vim.bo.filetype
@@ -29,6 +28,19 @@ local compileRun = function()
     elseif fileType == "typst" then
         vim.cmd(":TypstPreview")
     end
-end
-
-vim.keymap.set("n", "R", compileRun, { silent = true })
+end, {
+    desc = "Compile and run",
+})
+vim.api.nvim_create_user_command("CompileToDebug", function()
+    vim.cmd("w") -- save current file first
+    local fileType = vim.bo.filetype
+    if fileType == "c" then
+        split()
+        vim.cmd("term gcc -g % -o %<")
+    elseif fileType == "cpp" then
+        split()
+        vim.cmd("term g++ -g % -o %<")
+    end
+end, {
+    desc = "Compile current file with -g to debug",
+})
