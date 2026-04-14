@@ -30,7 +30,7 @@ local settings = {
 
     -- better rendering
     enable_kitty_graphics = true,
-    front_end = "WebGpu",
+    front_end = "OpenGL",
 
     -- font
     font = wezterm.font_with_fallback({
@@ -86,6 +86,42 @@ wezterm.on("gui-startup", function(cmd)
         },
     })
     window:gui_window():set_inner_size(width, height)
+end)
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+    local edge_background = "#1e1e2e"
+    local background = "#181825"
+    local foreground = "#cdd6f4"
+
+    if tab.is_active then
+        background = "#cba6f7"
+        foreground = "#11111b"
+    elseif hover then
+        background = "#313244"
+        foreground = "#cdd6f4"
+    end
+
+    local solid_left_arrow = ""
+    local solid_right_arrow = ""
+
+    local title = tab.active_pane.title
+    if #title > 15 then
+        title = wezterm.truncate_right(title, 14) .. "…"
+    end
+
+    local text = string.format(" %d: %s ", tab.tab_index + 1, title)
+
+    return {
+        { Background = { Color = edge_background } },
+        { Foreground = { Color = background } },
+        { Text = solid_left_arrow },
+        { Background = { Color = background } },
+        { Foreground = { Color = foreground } },
+        { Text = text },
+        { Background = { Color = edge_background } },
+        { Foreground = { Color = background } },
+        { Text = solid_right_arrow },
+    }
 end)
 
 return config
