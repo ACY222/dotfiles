@@ -5,7 +5,7 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         build = ":TSUpdate",
         opts = {
-            auto_install = true,
+            auto_install = false,
             ensure_installed = {
                 -- main languages
                 "c",
@@ -20,7 +20,10 @@ return {
             highlight = {
                 enable = true,
                 -- disable highlight for large files
-                disable = function(_, buf)
+                disable = function(lang, buf)
+                    if lang == "latex" or lang == "tex" then
+                        return true
+                    end
                     local max_filesize = 100 * 1024 -- 100 KB
                     local buf_name = vim.api.nvim_buf_get_name(buf)
 

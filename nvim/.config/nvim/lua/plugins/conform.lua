@@ -13,6 +13,8 @@ return {
                     typst = { "typstyle" },
                     python = { "ruff_organize_imports", "ruff_format" },
                     lua = { "stylua" },
+                    bib = { "bibtex-tidy" },
+                    tex = { "latexindent" },
                 },
 
                 format_on_save = {
@@ -89,6 +91,10 @@ return {
                     ["ruff_organize_imports"] = {
                         command = "ruff",
                         args = { "check", "--select", "I", "--fix", "--stdin-filename", "$FILENAME", "-" },
+                    },
+                    ["bibtex-tidy"] = {},
+                    ["latexindent"] = {
+                        prepend_args = { "-g", "/dev/null" },
                     },
                 },
             })

@@ -107,6 +107,9 @@ return {
                         clangdFileStatus = true,
                     },
                 },
+                textlsp = {
+                    filetypes = { "text", "tet", "bib" },
+                },
             }
 
             require("mason").setup({ ui = { icons = { package_installed = "✓" } } })
