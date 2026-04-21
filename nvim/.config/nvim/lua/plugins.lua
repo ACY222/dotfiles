@@ -41,6 +41,7 @@ require("lazy").setup({
     require("plugins.surround"), -- add/change/remove surround
     require("plugins.undo"), -- undo tree
     require("plugins.markdown"), -- preview, table mode
+    require("plugins.latex"),
     require("plugins.typst"), -- typst preview
     require("plugins.img-clip"), -- paste images in markup languages
     require("plugins.conform"), -- enable formatter
