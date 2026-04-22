@@ -40,6 +40,8 @@ vim.api.nvim_create_user_command("CompileToDebug", function()
     elseif fileType == "cpp" then
         split()
         vim.cmd("term g++ -g % -o %<")
+    elseif fileType == "typst" then
+        vim.cmd("term typst compile %")
     end
 end, {
     desc = "Compile current file with -g to debug",
