@@ -16,17 +16,17 @@ vim.api.nvim_create_user_command("CompileAndRun", function()
     elseif fileType == "python" then
         split()
         vim.cmd("term python3 %")
-    -- elseif fileType == 'lua' then
-    --     split()
-    --     vim.cmd("term luajit %")        -- I don't have this tool now
     elseif fileType == "markdown" then
         -- vim.cmd(":InstantMarkdownPreview")
-        vim.cmd(":MarkdownPreview")
+        vim.cmd("MarkdownPreview")
     elseif fileType == "rust" then
         split()
         vim.cmd("term cargo run -q")
     elseif fileType == "typst" then
-        vim.cmd(":TypstPreview")
+        vim.cmd("TypstPreview")
+    -- toggle auto-compile in latex
+    elseif fileType == "tex" then
+        vim.cmd("VimtexCompile")
     end
 end, {
     desc = "Compile and run",
