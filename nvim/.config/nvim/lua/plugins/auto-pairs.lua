@@ -5,34 +5,47 @@ return {
         opts = {
             keys = {
                 -- enable $ in markdown files
-                ["$"] = { escape = true, close = true, pair = "$$", enabled_filetypes = { "markdown", "typst" } },
-                ["`"] = { escape = false, close = true, pair = "``", enabled_filetypes = { "markdown", "typst" } },
+                ["$"] = {
+                    escape = true,
+                    close = true,
+                    pair = "$$",
+                    enabled_filetypes = { "markdown", "typst" },
+                    disable_command_mode = true,
+                },
+                ["`"] = {
+                    escape = false,
+                    close = true,
+                    pair = "``",
+                    enabled_filetypes = { "markdown", "typst" },
+                    disable_command_mode = true,
+                },
 
                 ["<"] = {
                     escape = true,
                     close = true,
                     pair = "<>",
                     disable_command_mode = true,
-                    disabled_filetypes = { "c", "cpp", "python", "rust", "typst" },
+                    disabled_filetypes = { "c", "cpp", "python", "rust", "typst", disable_command_mode = true },
                 },
                 [">"] = {
                     escape = true,
                     close = false,
                     pair = "<>",
                     disable_command_mode = true,
-                    disabled_filetypes = { "c", "cpp", "python" },
+                    disabled_filetypes = { "c", "cpp", "python", disable_command_mode = true },
                 },
-                ["'"] = { escape = false, close = false, pair = "''" },
+                ["'"] = { escape = false, close = false, pair = "''", disable_command_mode = true },
                 -- in vim, " is used to comment
-                ['"'] = { escape = true, close = true, pair = '""', disabled_filetypes = { "vim" } },
+                ['"'] = {
+                    escape = true,
+                    close = true,
+                    pair = '""',
+                    disabled_filetypes = { "vim" },
+                    disable_command_mode = true,
+                },
             },
         },
     },
-    -- {
-    --   'ijimiji/tabout.nvim',
-    --   event = 'InsertEnter',
-    --   -- I need to enable tabout from $$
-    -- },
     {
         -- it does what he said, rainbow-delimiters(brackets)
         "HiPhish/rainbow-delimiters.nvim",
