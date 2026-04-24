@@ -5,6 +5,9 @@ return {
         require("hlchunk").setup({
             indent = { -- vertical indent line, it's a little annoying for me now
                 enable = true,
+                exclude_filetypes = {
+                    typst = true,
+                },
                 -- style = { vim.api.nvim_get_hl(0, { name = "Whitespace" }) },
                 use_treesitter = false,
                 -- chars = { "│", "┊",},
