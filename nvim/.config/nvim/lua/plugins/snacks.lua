@@ -87,7 +87,12 @@ return {
             words = { enabled = true }, -- highlight current words
         },
         keys = {
-            -- File Explorer
+            -- check manual by `:h snacks-explorer`
+            -- actually, you can open the explorer by `:e <dir>`
+            --
+            -- select files with <Tab>
+            -- `m` to move, `c` to copy selected files to the current directory
+            -- <BS> go up one directory
             {
                 "<leader>e",
                 function()
