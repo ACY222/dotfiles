@@ -7,8 +7,9 @@ endif
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
-\| endifcall plug#begin('~/.vim/plugged')
+\| endif
 
+call plug#begin('~/.vim/plugged')
 " Open fern at the current working directory by `:Fern .`
 " On a fern buffer, hit `?` to list mappings
 Plug 'lambdalisue/vim-fern'
