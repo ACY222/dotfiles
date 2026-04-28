@@ -11,6 +11,7 @@ alias gr='git rebase'
 alias lg='lazygit'
 
 # tmux
-alias tls='tmux ls'
-alias tnew='tmux new -s'
-alias ta='tmux attach -t'
+alias tl='tmux ls'
+alias tn='tmux new'
+alias ta='tmux attach'
+alias tk='tmux kill-session'
