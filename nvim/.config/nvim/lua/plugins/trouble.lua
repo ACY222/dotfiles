@@ -2,11 +2,8 @@ return {
     "folke/trouble.nvim",
     cmd = "Trouble",
     opts = {
-        -- float windows
-        float = {
-            border = "rounded",
-            size = 0.3,
-        },
+        auto_close = true,
+        auto_jump = true,
         focus = true,
         -- move to corresponding lines when moving cursor
         follow = true,
