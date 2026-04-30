@@ -107,9 +107,6 @@ return {
                         clangdFileStatus = true,
                     },
                 },
-                textlsp = {
-                    filetypes = { "text", "tet", "bib" },
-                },
             }
 
             require("mason").setup({ ui = { icons = { package_installed = "✓" } } })
@@ -122,11 +119,26 @@ return {
                     function(server_name)
                         local server = servers[server_name] or {}
                         server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-                        lspconfig[server_name].setup(server)
+                        vim.lsp.config[server_name] =
+                            vim.tbl_deep_extend("force", vim.lsp.config[server_name] or {}, server)
+                        vim.lsp.enable(server_name)
                     end,
                 },
             })
+            local texlab_opts = {
+                cmd = { "/usr/local/bin/texlab" },
+                capabilities = capabilities,
+                settings = {
+                    texlab = {
+                        build = {
+                            onSave = true,
+                        },
+                    },
+                },
+            }
 
+            vim.lsp.config.texlab = vim.tbl_deep_extend("force", vim.lsp.config.texlab or {}, texlab_opts)
+            vim.lsp.enable("texlab")
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(args)
