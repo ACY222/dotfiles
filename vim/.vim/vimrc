@@ -201,7 +201,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'      " <C-n>, directory overview
 Plug 'jiangmiao/auto-pairs'
 " vim themes
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'vim-airline/vim-airline'
 Plug 'easymotion/vim-easymotion'		" move as fast as you want!
 Plug 'vim-python/python-syntax', {'for': 'py'}  " python syntax highlight
@@ -246,8 +246,8 @@ let g:NERDTreeWinSize = 18
 " }}}
 
 
-" airline, tokyonight settings {{{
-" let g:airline_theme = 'tokyonight'
+" airline, catppuccin settings {{{
+let g:airline_theme = 'catppuccin_mocha'
 let g:airline_powerline_fonts = 1
 let g:airline_extensions = ['tabline', 'coc', 'branch']
 " |A|B|     C       X|Y|Z|[...]
@@ -264,8 +264,7 @@ let g:airline_right_alt_sep = ''
 " let g:tokyonight_transparent_background = 1     " trasparent background
 " let g:tokyonight_enable_italic = 0              " non-italic text
 " let g:tokyonight_disable_italic_comment = 0     " italic comment
-" colorscheme gruvbox
-colorscheme dracula
+colorscheme catppuccin_mocha
 " }}}
 
 
