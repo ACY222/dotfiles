@@ -47,7 +47,6 @@ require("lazy").setup({
     require("plugins.trim-space"), -- auto remove space in the end
     require("plugins.trouble"), -- showing diagnostics, references, quickfix and so on
     require("plugins.hardtime"), -- practice your vim skills
-    require("plugins.opencode"), -- enable opencode
     require("plugins.debug"),
     -- navigation
     require("plugins.flash"), -- enhanced f, t, and word-search
