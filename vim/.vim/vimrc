@@ -1,4 +1,4 @@
-" base config {{{
+" base config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set guicursor=a:block
 set nocompatible 	" not vi compatible
@@ -47,10 +47,9 @@ set updatetime=100
 set signcolumn=yes
 set showmatch
 set matchtime=1
-" }}}
 
 
-" edit config {{{
+" edit config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showcmd 		" display inputting commands
 set autoindent 		" copy indent from current line when starting a new line
@@ -95,10 +94,9 @@ augroup fold_vimscript
 augroup END
 
 set foldlevelstart=0        " start with all folds closed
-" }}}
 
 
-" search config {{{
+" search config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==# is the 'case-sensitive no matter what the user has set'
 " ==? is the 'case-insensitive no matter what the user has set'
@@ -107,7 +105,6 @@ set smartcase 	    " ignore case when lowercase letter only
 set incsearch 		" searching as you type
 set nohlsearch      " nohighlight after search
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cache and buffer config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nobackup                " don't create backup file
@@ -122,15 +119,13 @@ set hidden 			        " enable to hidden buffers without saving
 set wildmenu
 set wildmode=longest,list
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " encode config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set langmenu=zh_CN.UTF-8    " set language menu encode utf8
 set helplang=cn             " set helping language Chinese
-" }}}
 
 
-" binding config {{{
+" binding config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use jk to escape insert mode
 inoremap jk <esc>
@@ -192,22 +187,19 @@ autocmd FileType vim nnoremap <leader>sv :w <CR> :source $MYVIMRC<CR>
 " " install and clean plugins
 autocmd FileType vim nnoremap <leader>in :PlugInstall<CR>
 autocmd FileType vim nnoremap <leader>cl :PlugClean<CR>
-" }}}
 
 
-" plugins config {{{
+" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'      " <C-n>, directory overview
+Plug 'preservim/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 " vim themes
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'vim-airline/vim-airline'
 Plug 'easymotion/vim-easymotion'		" move as fast as you want!
 Plug 'vim-python/python-syntax', {'for': 'py'}  " python syntax highlight
-" Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}    " search file
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'chxuan/prepare-code'
 " change surround quickly
 Plug 'tpope/vim-surround'
 " add comments quickly
@@ -215,27 +207,18 @@ Plug 'tpope/vim-commentary'
 " cpp highlight
 " loaded when a file with specific file type is opened
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
-" enhance f/t
-Plug 'rhysd/clever-f.vim'
 " colorful parenthesis
 Plug 'frazrepo/vim-rainbow'
 " shows git diff in the column. it shows which lines have been added, deleted,
 " modified and so on
 Plug 'airblade/vim-gitgutter'
 " display indent 'block'
-Plug 'preservim/vim-indent-guides'
-" it doesn't work
-Plug 'instant-markdown/vim-instant-markdown'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
-" LeaderF settings {{{
-" let g:Lf_ShortcutF = '<C-p>'
-" }}}
-
-
-" Nerdtree Settings {{{
+" Nerdtree Settings
 " Press tt to show or hide the nerd tree
-nnoremap tt :NERDTreeToggle<CR>
+nnoremap nt :NERDTree<CR>
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHIghlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
@@ -243,10 +226,11 @@ let g:NERDTreeHighlightFoldersFullName = 1
 let g:NERDTreeDirArrowExpandable='▷'
 let g:NERDTreeDirArrowCollapsible='▼'
 let g:NERDTreeWinSize = 18
-" }}}
 
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
 
-" airline, catppuccin settings {{{
+" airline, catppuccin settings
 let g:airline_theme = 'catppuccin_mocha'
 let g:airline_powerline_fonts = 1
 let g:airline_extensions = ['tabline', 'coc', 'branch']
@@ -265,32 +249,19 @@ let g:airline_right_alt_sep = ''
 " let g:tokyonight_enable_italic = 0              " non-italic text
 " let g:tokyonight_disable_italic_comment = 0     " italic comment
 colorscheme catppuccin_mocha
-" }}}
 
 
-" easymotion settings {{{
+" easymotion settings
 let g:EasyMotion_smartcase = 1
 map <Leader> <Plug>(easymotion-prefix)
 " based on word
 nnoremap <leader>w <Plug>(easymotion-bd-w)
-" Based on two characters
-nnoremap <leader>s <Plug>(easymotion-s2)
-" It looks nice, but when the contents are folded, it can find them
-" nnoremap / <Plug>(easymotion-sn)
-" onoremap / <Plug>(easymotion-tn)
-" nnoremap n <Plug>(easymotion-next)
-" nnoremap N <Plug>(easymotion-prev)
 
-" }}}
-
-
-" it seems that I can do these with key-mapping
+" auto-pairs settings
 let g:surround_no_insert_mappings=1
 " verb(cs, ds, ys) + scope + object(open parenthesis has one more whitespace)
-" }}}
 
-
-" coc.nvim settings {{{
+" coc.nvim settings
 " Use <CR> to accept selected completion item
 " Use tab, S-tab to select next, previous completion
 " Use <C-a> to trigger completion
@@ -302,7 +273,7 @@ inoremap <expr><C-p> coc#pum#visible() ? coc#pum#prev(1) :
 inoremap <silent><expr> <C-y> coc#pum#visible() ? coc#pum#confirm() :
       \ coc#refresh()
 
-" CheckBackspace{{{
+" CheckBackspace
 function! CheckBackspace() abort
     let col = col('.') - 1            " cursor_pos--
     " if cursor is the start of the line
@@ -310,7 +281,6 @@ function! CheckBackspace() abort
     " or it's the end of the line
     return !col || getline('.')[col - 1]  =~# '\s' || col >= len(getline('.'))
 endfunction
-"}}}
 
 " Use ' -' and ' =' to navigate diagnostics
 " ' a' to show all diagnostics
@@ -340,44 +310,22 @@ function! CocActionOpenFromSelected(type) abort
 endfunction
 xnoremap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' .visualmode()<CR>
 nnoremap <silent> <leader>a :<C-u>set operatorfunc=<SID>CocActionOpenFromSelected<CR>g@
-" }}}
 
 
-" vim-rainbow settings {{{
+" vim-rainbow settings
 let g:rainbow_active = 1
-"}}}
 
 
-" vim-gitgutter settings {{{
+" vim-gitgutter settings
 " jump between hunks(hunk: a contiguous block of changes between two versions)
 nnoremap ]h <Plug>(GitGutterNextHunk)
 nnoremap [h <Plug>(GitGutterPrevHunk)
-" }}}
 
 
-" python highlight{{{
+" python highlight
 let g:python_highlight_all = 1
-"}}}
 
 
-" indent-guide {{{
-let g:indent_guides_enable_on_vim_startup = 1   " auto enable
-let g:indent_guides_start_level = 2             " start in the second level
-let g:indent_guides_guide_size = 1              " the width of the bar
-" }}}
-
-
-" vim-instant-markdown {{{
-" execute   `:h vim-instant-markdown-configuration` to read about configurations
-let g:instant_markdown_slow = 1         " no real-time refresh
-let g:instant_markdown_autostart = 1    " auto launch when open markdown file
-let g:instant_markdown_browser = "chrome --new-window"
-let g:instant_markdown_autoscroll = 1   " auto scrools to where cursor is
-let g:instant_markdown_theme = 'dark'
-
-" }}}
 
 let &t_ti .= "\e[2 q""]"
 let &t_te .= "\e[0 q""]"
-" }}}
-" new line
