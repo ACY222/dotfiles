@@ -55,10 +55,6 @@ set matchtime=1
 set showcmd 		" display inputting commands
 set autoindent 		" copy indent from current line when starting a new line
 
-" show indent line, it looks annoying
-" set list
-" set listchars=tab:\ \ ,leadmultispace:┊\ \ \ ,multispace:\ \
-
 set tabstop=4       " the size of tab
 set expandtab		" replace tab with spaces
 set softtabstop=4	" 1 tab == 4 spaces
@@ -69,7 +65,6 @@ set textwidth=80    " the width of each line
 set wrap            " break lines automatically
 set linebreak       " break only when encountering with specific character
 set scrolloff=5
-" match ErrorMsg '\%>80v.\+'	" highlight the characters above 80
 
 set undofile                " create undo file
 set undodir=~/.vim/.undo//
@@ -236,10 +231,6 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-" let g:tokyonight_style = 'night'
-" let g:tokyonight_transparent_background = 1     " trasparent background
-" let g:tokyonight_enable_italic = 0              " non-italic text
-" let g:tokyonight_disable_italic_comment = 0     " italic comment
 colorscheme catppuccin_mocha
 
 
@@ -251,7 +242,6 @@ nnoremap <leader>w <Plug>(easymotion-bd-w)
 
 " auto-pairs settings
 let g:surround_no_insert_mappings=1
-" verb(cs, ds, ys) + scope + object(open parenthesis has one more whitespace)
 
 " coc.nvim settings
 " Use <CR> to accept selected completion item
@@ -267,11 +257,8 @@ inoremap <silent><expr> <C-y> coc#pum#visible() ? coc#pum#confirm() :
 
 " CheckBackspace
 function! CheckBackspace() abort
-    let col = col('.') - 1            " cursor_pos--
-    " if cursor is the start of the line
-    " or the char before it is whitespace
-    " or it's the end of the line
-    return !col || getline('.')[col - 1]  =~# '\s' || col >= len(getline('.'))
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use ' -' and ' =' to navigate diagnostics
