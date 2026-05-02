@@ -218,14 +218,14 @@ call plug#end()
 
 " Nerdtree Settings
 " Press tt to show or hide the nerd tree
-nnoremap nt :NERDTree<CR>
+nnoremap <Leader>e :NERDTree<CR>
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHIghlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeHighlightFoldersFullName = 1
 let g:NERDTreeDirArrowExpandable='▷'
 let g:NERDTreeDirArrowCollapsible='▼'
-let g:NERDTreeWinSize = 18
+let g:NERDTreeWinSize = 28
 
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
