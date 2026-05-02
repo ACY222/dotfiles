@@ -194,7 +194,7 @@ Plug 'lambdalisue/vim-fern'
 Plug 'jiangmiao/auto-pairs'
 " vim themes
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'		" move as fast as you want!
 Plug 'vim-python/python-syntax', {'for': 'py'}  " python syntax highlight
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -216,21 +216,9 @@ Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
 " airline, catppuccin settings
-let g:airline_theme = 'catppuccin_mocha'
-let g:airline_powerline_fonts = 1
-let g:airline_extensions = ['tabline', 'coc', 'branch']
-" |A|B|     C       X|Y|Z|[...]
-let g:airline_section_b = '%n'              " buffer number
-let g:airline_section_c = '%F'              " full file name
-let g:airline_section_x = '%h'              " help buffer flag
-let g:airline_section_y = '%y'              " filetype
-let g:airline_section_z = '%p%% ≡ %l/%L %c' " percentage, row, Row, column
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-colorscheme catppuccin_mocha
+let g:lightline = { 'colorscheme': 'catppuccin_mocha' }
 
+colorscheme catppuccin_mocha
 
 " easymotion settings
 let g:EasyMotion_smartcase = 1
