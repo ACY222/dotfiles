@@ -192,6 +192,9 @@ autocmd FileType vim nnoremap <leader>cl :PlugClean<CR>
 " plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+" Open fern at the current working directory by `:Fern .`
+" On a fern buffer, hit `?` to list mappings
+Plug 'lambdalisue/vim-fern'
 Plug 'jiangmiao/auto-pairs'
 " vim themes
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
