@@ -239,7 +239,8 @@ map <Leader> <Plug>(easymotion-prefix)
 nnoremap <leader>w <Plug>(easymotion-bd-w)
 
 " auto-pairs settings
-let g:surround_no_insert_mappings=1
+let g:AutoPairsMapBS = 0
+let g:AutoPairsMapSpace = 0
 
 " coc.nvim settings
 " Use <CR> to accept selected completion item
