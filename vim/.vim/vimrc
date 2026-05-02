@@ -192,7 +192,6 @@ autocmd FileType vim nnoremap <leader>cl :PlugClean<CR>
 " plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'preservim/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 " vim themes
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
@@ -214,21 +213,9 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'airblade/vim-gitgutter'
 " display indent 'block'
 Plug 'Yggdroot/indentLine'
+" windows separator
+Plug 'nvim-zh/colorful-winsep.nvim'
 call plug#end()
-
-" Nerdtree Settings
-" Press tt to show or hide the nerd tree
-nnoremap <Leader>e :NERDTree<CR>
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHIghlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeHighlightFoldersFullName = 1
-let g:NERDTreeDirArrowExpandable='▷'
-let g:NERDTreeDirArrowCollapsible='▼'
-let g:NERDTreeWinSize = 28
-
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
 
 " airline, catppuccin settings
 let g:airline_theme = 'catppuccin_mocha'
