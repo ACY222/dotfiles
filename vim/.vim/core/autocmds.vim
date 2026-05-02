@@ -20,3 +20,12 @@ augroup VimConfig
     autocmd FileType vim nnoremap <buffer> <leader>in :PlugInstall<CR>
     autocmd FileType vim nnoremap <buffer> <leader>cl :PlugClean<CR>
 augroup END
+
+" stay where you were when you left last time
+augroup RestoreCursor
+    autocmd!
+    autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \   execute "normal! g`\"" |
+        \ endif
+augroup END
