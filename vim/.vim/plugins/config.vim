@@ -29,6 +29,13 @@ nnoremap <leader>w <Plug>(easymotion-bd-w)
 let g:AutoPairsMapBS = 0
 let g:AutoPairsMapSpace = 0
 
+augroup CustomFileTypePairs
+    autocmd!
+
+    autocmd FileType vim
+        \ let b:AutoPairs = {'(':')', '[':']', '<':'>', '{':'}', "'":"'", '`':'`'}
+augroup END
+
 " coc.nvim settings
 " Use <CR> to accept selected completion item
 " Use tab, S-tab to select next, previous completion
