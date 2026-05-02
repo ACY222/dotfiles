@@ -219,6 +219,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine'
 " windows separator
 Plug 'nvim-zh/colorful-winsep.nvim'
+Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
 " airline, catppuccin settings
@@ -316,7 +317,8 @@ nnoremap [h <Plug>(GitGutterPrevHunk)
 " python highlight
 let g:python_highlight_all = 1
 
-
+" yank highlight
+let g:highlightedyank_highlight_duration = 200
 
 let &t_ti .= "\e[2 q""]"
 let &t_te .= "\e[0 q""]"
