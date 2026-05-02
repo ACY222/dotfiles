@@ -212,8 +212,6 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'airblade/vim-gitgutter'
 " display indent 'block'
 Plug 'Yggdroot/indentLine'
-" windows separator
-Plug 'nvim-zh/colorful-winsep.nvim'
 Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
