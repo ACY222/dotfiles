@@ -43,11 +43,12 @@ local mappings = {
     { from = "<C-j>", to = "<C-w>-" },
     { from = "<C-k>", to = "<C-w>+" },
     { from = "<C-l>", to = "<C-w>>" },
+
     -- switch between windows
-    { from = "<S-h>", to = "<C-w>h" },
-    { from = "<S-j>", to = "<C-w>j" },
-    { from = "<S-k>", to = "<C-w>k" },
-    { from = "<S-l>", to = "<C-w>l" },
+    { from = "H", to = "<C-w>h" },
+    { from = "J", to = "<C-w>j" },
+    { from = "K", to = "<C-w>k" },
+    { from = "L", to = "<C-w>l" },
 
     ---------- buffer management ----------
     -- why not use <Tab> and <S-Tab> instead?
