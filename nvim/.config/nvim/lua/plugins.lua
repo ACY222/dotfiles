@@ -54,6 +54,7 @@ require("lazy").setup({
     -- tools
     require("plugins.leetcode"),
     require("plugins.snacks"),
+    require("plugins.file_explorer"),
 })
 
 -- my custom plugins
