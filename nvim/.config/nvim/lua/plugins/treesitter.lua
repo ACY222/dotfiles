@@ -10,7 +10,6 @@ return {
                 -- main languages
                 "c",
                 "cpp",
-                "python",
                 "markdown",
                 "typst",
                 -- config languages
@@ -42,18 +41,6 @@ return {
             indent = {
                 enable = true,
             },
-            -- increase selection scope gradually
-            incremental_selection = {
-                enable = false,
-                keymaps = {
-                    -- use <CR> to trigger selection and increase scope
-                    -- <BS> to decrease scope
-                    init_selection = "<CR>",
-                    node_incremental = "<CR>",
-                    scope_incremental = false,
-                    node_decremental = "<BS>",
-                },
-            },
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
@@ -74,15 +61,6 @@ return {
             trim_scope = "outer",
             -- Line used to calculate context. Choices: 'cursor', 'topline'
             mode = "cursor",
-        },
-        keys = {
-            {
-                "[c",
-                function()
-                    require("treesitter-context").go_to_context()
-                end,
-                desc = "Jump to The Beginning of the Function",
-            },
         },
     },
 }

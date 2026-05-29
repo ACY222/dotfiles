@@ -5,7 +5,6 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     opts = {
-        -- use `{` and `}` to jump between functions
         on_attach = function(bufnr)
             -- banned in some filetypes
             local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
@@ -13,6 +12,7 @@ return {
                 return
             end
 
+            -- use `{` and `}` to jump between functions
             vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
             vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
         end,

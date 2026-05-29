@@ -33,24 +33,13 @@ return {
                     settings = {
                         Lua = {
                             hint = { enable = true },
-                            diagnostics = { globals = { "vim" } },
                             workspace = { checkThirdParty = false },
                             telemetry = { enable = false },
                         },
                     },
                 },
                 -- use default settings
-                ruff = {},
-                pyright = {},
                 marksman = {},
-                rust_analyzer = {
-                    settings = {
-                        ["rust-analyzer"] = {
-                            inlayHints = { bindingHints = { enable = true } },
-                            checkOnSave = { command = "clippy" },
-                        },
-                    },
-                },
                 tinymist = {
                     offset_encoding = "utf-8",
                     single_file_support = true,
