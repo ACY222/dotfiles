@@ -19,8 +19,11 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'easymotion/vim-easymotion'		" move as fast as you want!
-Plug 'vim-python/python-syntax', {'for': 'py'}  " python syntax highlight
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" auto completion
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'       " run `:LspInstallServer` to download lsp for current filetype
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " change surround quickly
 Plug 'tpope/vim-surround'
 " add comments quickly

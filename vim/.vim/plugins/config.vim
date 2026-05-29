@@ -36,53 +36,30 @@ augroup CustomFileTypePairs
         \ let b:AutoPairs = {'(':')', '[':']', '<':'>', '{':'}', "'":"'", '`':'`'}
 augroup END
 
-" coc.nvim settings
-" Use <CR> to accept selected completion item
-" Use tab, S-tab to select next, previous completion
-" Use <C-a> to trigger completion
-inoremap <expr><C-n> coc#pum#visible() ? coc#pum#next(1) :
-      \ coc#refresh()
-inoremap <expr><C-p> coc#pum#visible() ? coc#pum#prev(1) :
-      \ coc#refresh()
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <C-y> coc#pum#visible() ? coc#pum#confirm() :
-      \ coc#refresh()
+" asyncomplete.vim
+inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : asyncomplete#force_refresh()
+inoremap <expr> <C-p> pumvisible() ? "\<C-p>" : asyncomplete#force_refresh()
+inoremap <expr> <C-y> pumvisible() ? asyncomplete#close_popup() : "\<C-y>"
 
-" CheckBackspace
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> <leader>h <plug>(lsp-hover)
 endfunction
 
-" Use ' -' and ' =' to navigate diagnostics
-" ' a' to show all diagnostics
-nnoremap <silent> <leader>- <Plug>(coc-diagnostic-prev)
-nnoremap <silent> <leader>= <Plug>(coc-diagnostic-next)
-nnoremap <silent> <leader>a :<C-u>CocList diagnostics<CR>
-" Goto code navigation
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gt <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
-" Use D to show documentation in preview window
-nnoremap <silent> <leader>d :call ShowDocumentation()<CR>
-function! ShowDocumentation()
-    if CocAction('hasProvider', 'hover')
-        call CocActionAsync('doHover')
-    else
-        call feedkeys('K', 'in')
-    endif
-endfunction
-" Symbol renaming
-nnoremap <leader>rn <Plug>(coc-rename)
-" Applying codeAction to the selected region
-" Maybe I need some plugins to use these two lines
-function! CocActionOpenFromSelected(type) abort
-    execute 'CocCommand actions.open ' . a:type
-endfunction
-xnoremap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' .visualmode()<CR>
-nnoremap <silent> <leader>a :<C-u>set operatorfunc=<SID>CocActionOpenFromSelected<CR>g@
-
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 " vim-rainbow settings
 let g:rainbow_active = 1
