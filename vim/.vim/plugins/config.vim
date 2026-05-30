@@ -39,7 +39,13 @@ augroup END
 " asyncomplete.vim
 inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : asyncomplete#force_refresh()
 inoremap <expr> <C-p> pumvisible() ? "\<C-p>" : asyncomplete#force_refresh()
-inoremap <expr> <C-y> pumvisible() ? asyncomplete#close_popup() : "\<C-y>"
+inoremap <expr> <C-y> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>\<C-y>" : "\<C-y>") : "\<C-y>"
+
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete

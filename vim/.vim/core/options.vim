@@ -10,9 +10,9 @@ filetype indent on          " use corresponding indent
 filetype plugin on          " set load plugin by file type
 
 " If this many ms nothing is typed the swap file will be written to disk
-set updatetime=100          
-" timeout on :mappings 
-set timeoutlen=500    
+set updatetime=100
+" timeout on :mappings
+set timeoutlen=500
 set mouse+=a                " Enable mouse support
 set clipboard=unnamed       " use system clipboard
 
@@ -62,7 +62,7 @@ set showmatch               " highlight matching brackets
 set matchtime=1
 
 " cursor looks
-set guicursor=n-v-r:block,i-c-ci:ver25  
+set guicursor=n-v-r:block,i-c-ci:ver25
 let &t_ti .= "\e[2 q"       " Terminal block cursor on enter
 let &t_te .= "\e[0 q"       " Terminal default cursor on exit
 
@@ -79,6 +79,7 @@ hi EndOfBuffer guibg=NONE ctermbg=NONE
 set backspace=indent,eol,start  " allow backspacing over everything
 set whichwrap+=h,l          " set the cursor keys across rows
 set matchpairs+=<:>         " allow % jump between <>
+set completeopt=menuone,preview
 
 " indents and tabs
 set autoindent              " copy indent from current line
