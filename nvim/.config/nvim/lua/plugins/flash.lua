@@ -15,5 +15,10 @@ return {
         jump = {
             jumplist = true,
         },
+        modes = {
+            char = {
+                enabled = false,
+            },
+        },
     },
 }
