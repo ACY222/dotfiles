@@ -49,8 +49,8 @@ format = 'at[ $time]($style) '
 style = "bold subtext0"
 
 [character]
-success_symbol = "[❯](green)"
-error_symbol = "[❯](red)"
+success_symbol = "[\\$](green)"
+error_symbol = "[\\$](red)"
 
 # common languages
 [c]
