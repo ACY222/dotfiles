@@ -11,7 +11,6 @@ return {
                     cpp = { "clang-format" },
                     c = { "clang-format" },
                     typst = { "typstyle" },
-                    python = { "ruff_organize_imports", "ruff_format" },
                     lua = { "stylua" },
                 },
 
@@ -70,25 +69,6 @@ return {
 
                     ["stylua"] = {
                         prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
-                    },
-
-                    ["ruff_format"] = {
-                        args = function(_, _)
-                            return {
-                                "format",
-                                "--line-length",
-                                "120",
-                                "--force-exclude",
-                                "--stdin-filename",
-                                "$FILENAME",
-                                "-",
-                            }
-                        end,
-                    },
-
-                    ["ruff_organize_imports"] = {
-                        command = "ruff",
-                        args = { "check", "--select", "I", "--fix", "--stdin-filename", "$FILENAME", "-" },
                     },
                 },
             })
