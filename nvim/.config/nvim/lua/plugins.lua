@@ -50,7 +50,6 @@ require("lazy").setup({
     require("plugins.treesitter"), -- better highlight and indent
 
     require("plugins.lua"), -- lua support
-    require("plugins.latex"), -- latex auto compile
     require("plugins.img-clip"), -- paste images in markup languages
     require("plugins.conform"), -- enable formatter
     require("plugins.trouble"), -- showing diagnostics, references, quickfix and so on

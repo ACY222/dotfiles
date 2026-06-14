@@ -114,20 +114,7 @@ return {
                     end,
                 },
             })
-            local texlab_opts = {
-                cmd = { "/usr/local/bin/texlab" },
-                capabilities = capabilities,
-                settings = {
-                    texlab = {
-                        build = {
-                            onSave = true,
-                        },
-                    },
-                },
-            }
 
-            vim.lsp.config.texlab = vim.tbl_deep_extend("force", vim.lsp.config.texlab or {}, texlab_opts)
-            vim.lsp.enable("texlab")
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(args)
