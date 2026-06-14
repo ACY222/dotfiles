@@ -54,7 +54,6 @@ require("lazy").setup({
     require("plugins.conform"), -- enable formatter
     require("plugins.trouble"), -- showing diagnostics, references, quickfix and so on
 
-    require("plugins.outline"), -- code outline window
     require("plugins.leetcode"),
 })
 
