@@ -47,7 +47,6 @@ require("lazy").setup({
 
     -- unnecessary
     require("plugins.smear-cursor"),
-    require("plugins.treesitter"), -- better highlight and indent
 
     require("plugins.lua"), -- lua support
     require("plugins.img-clip"), -- paste images in markup languages
