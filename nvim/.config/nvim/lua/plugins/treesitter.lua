@@ -2,7 +2,7 @@ return {
     {
         -- highlight, indent, fold function by syntax analyzing
         "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPost", "BufNewFile" },
+        branch = "main",
         build = ":TSUpdate",
         opts = {
             auto_install = false,
@@ -10,6 +10,7 @@ return {
                 -- main languages
                 "c",
                 "cpp",
+                "rust",
                 "markdown",
                 "typst",
                 -- config languages
@@ -19,10 +20,7 @@ return {
             highlight = {
                 enable = true,
                 -- disable highlight for large files
-                disable = function(lang, buf)
-                    if lang == "latex" or lang == "tex" then
-                        return true
-                    end
+                disable = function(_, buf)
                     local max_filesize = 100 * 1024 -- 100 KB
                     local buf_name = vim.api.nvim_buf_get_name(buf)
 

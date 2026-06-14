@@ -80,7 +80,7 @@ end
 -- Markdown & Typst keymaps config
 local my_docs_group = vim.api.nvim_create_augroup("Documents Keymaps", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "markdown", "types" },
+    pattern = { "markdown", "typst" },
     group = my_docs_group,
     callback = function()
         local opts = { buffer = true, silent = true, noremap = true }
