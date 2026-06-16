@@ -61,8 +61,6 @@ vim.cmd([[
     set undodir=$HOME/.config/nvim/tmp/undo,.
 ]])
 
-vim.lsp.set_log_level("warn")
-
 -- entering insert mode when start a terminal
 vim.cmd([[autocmd TermOpen term://* startinsert]])
 

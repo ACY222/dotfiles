@@ -50,24 +50,11 @@ local mappings = {
     { from = "K", to = "<C-w>k" },
     { from = "L", to = "<C-w>l" },
 
-    ---------- buffer management ----------
-    -- why not use <Tab> and <S-Tab> instead?
-    { from = "<leader>n", to = ":bn<cr>" },
-    { from = "<leader>p", to = ":bp<cr>" },
-    { from = "<leader>d", to = ":bd<cr>" },
-
     ---------- terminal ----------
     -- In terminal, when you can enter commands, you are in terminal mode
     -- when you can move your cursor freely, you are in normal mode
     -- use Esc to return to normal mode(jk to return to vi-cmd-mode)
     { from = "jk", to = "<C-\\><C-N>", mode = "t" },
-    -- use ' d' to close terminal in terminal mode
-    -- use Q to quit in normal mode
-    { from = "<leader>d", to = "exit<CR>", mode = "t" },
-    { from = "p", to = '"_dP', mode = "x" },
-
-    -- { from = '<++>', to = '<++>', <++> },
-    -- { from = '<++>', to = '<++>', <++> },
 }
 
 -- use Vterm to create a term, must begin with an uppercase letter
