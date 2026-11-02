@@ -22,6 +22,9 @@ vim.api.nvim_create_user_command("CompileAndRun", function()
     elseif fileType == "rust" then
         split()
         vim.cmd("term cargo run -q")
+    elseif fileType == "haskell" then
+        split()
+        vim.cmd("term runghc %")
     elseif fileType == "typst" then
         vim.cmd("TypstPreview")
     -- toggle auto-compile in latex
@@ -42,6 +45,9 @@ vim.api.nvim_create_user_command("CompileToDebug", function()
         vim.cmd("term g++ -g % -o %<")
     elseif fileType == "typst" then
         vim.cmd("term typst compile %")
+    elseif fileType == "haskell" then
+        split()
+        vim.cmd("term ghc -g % -o %<")
     end
 end, {
     desc = "Compile current file with -g to debug",
