@@ -34,6 +34,7 @@ local settings = {
 
     -- font
     font = wezterm.font_with_fallback({
+        "Cascadia Mono",
         "FiraCode Nerd Font Mono",
         "Consolas",
         "LXGW WenKai Mono",
