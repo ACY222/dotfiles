@@ -38,7 +38,6 @@ require("lazy").setup({
     require("plugins.markdown"), -- preview, table mode
     require("plugins.typst"), -- typst preview
     require("plugins.trim-space"), -- auto remove space in the end
-    require("plugins.cmdline"), -- enhance cmdline mode
     -- navigation
     require("plugins.flash"), -- enhanced f, t, and word-search
     -- tools
