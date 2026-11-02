@@ -9,7 +9,7 @@ return {
         "MunifTanjim/nui.nvim",
     },
     build = ":LeetInstall",
-    config = function()
-        require("leetcode").setup({})
-    end,
+    opts = {
+        lang = "rust",
+    },
 }

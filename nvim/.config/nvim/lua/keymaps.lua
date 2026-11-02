@@ -44,21 +44,12 @@ local mappings = {
     { from = "<C-k>", to = "<C-w>+" },
     { from = "<C-l>", to = "<C-w>>" },
 
-    -- switch between windows
-    { from = "H", to = "<C-w>h" },
-    { from = "J", to = "<C-w>j" },
-    { from = "K", to = "<C-w>k" },
-    { from = "L", to = "<C-w>l" },
-
     ---------- terminal ----------
     -- In terminal, when you can enter commands, you are in terminal mode
     -- when you can move your cursor freely, you are in normal mode
     -- use Esc to return to normal mode(jk to return to vi-cmd-mode)
     { from = "jk", to = "<C-\\><C-N>", mode = "t" },
 }
-
--- use Vterm to create a term, must begin with an uppercase letter
-vim.api.nvim_create_user_command("Vterm", "vsp | terminal", {})
 
 for _, mapping in ipairs(mappings) do
     vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, { noremap = true, silent = true })
